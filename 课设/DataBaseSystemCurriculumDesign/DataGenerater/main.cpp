@@ -1,6 +1,7 @@
 #include <QtWidgets/QApplication>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 #include <QtCore/QDebug>
 
 int main(int argc, char *argv[])
@@ -15,6 +16,22 @@ int main(int argc, char *argv[])
 	if (db.open())
 	{
 		qDebug() << "ok";
+		QSqlQuery query;
+		query.exec("SELECT SNO, SNAME FROM FUOOKAMI.S");
+
+		if (!query.isActive())
+		{
+			qDebug() << query.lastError().text();
+		}
+		else 
+		{
+			while (query.next())
+			{
+				QString sno = query.value(0).toString();
+				QString sname = query.value(1).toString();
+				qDebug() << sno << ' ' << sname << '\n';
+			}
+		}
 	}
 
 	return a.exec();
