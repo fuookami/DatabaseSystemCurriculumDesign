@@ -111,7 +111,7 @@ bool loadTelephoneMacs()
 	QFile file("ResourceFiles\\TelephoneMac.txt");
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug() << "Can not open ResourceFiles\\MobileMac.txt\n";
+		qDebug() << "Can not open ResourceFiles\\TelephoneMac.txt\n";
 		return false;
 	}
 	while (!file.atEnd())
@@ -175,6 +175,34 @@ void generateDatas()
 	}
 }
 
+bool initDatabase()
+{
+	QFile file("ResourceFiles\\InitDatabaseScript.sql");
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Can not open ResourceFiles\\InitDatabaseScript.sql\n";
+		return false;
+	}
+	QString str(file.readAll());
+	QStringList sqls(str.split("--"));
+
+	QSqlDatabase db(QSqlDatabase::database("DSCD"));
+	db.transaction();
+	QSqlQuery query(db);
+
+	for (unsigned long i(0), j(sqls.size()); i != j; ++i)
+	{
+		if (!query.exec(sqls[i]))
+		{
+			qDebug() << "Wrong: " << sqls[i] << '\n';
+			qDebug() << query.lastError().text();
+			return false;
+		}
+	}
+
+	return true;
+}
+
 void injectDatas()
 {
 	std::random_device rd;
@@ -202,7 +230,7 @@ void injectDatas()
 	for (unsigned long i(0), j(groups.size()); i != j; ++i)
 	{
 		query.prepare("INSERT INTO DSCD.GROUPS (id, name) "
-			"VALUES (SYSTEM.SEQ_DSCD_GROUP_ID.nextval, :name)");
+			"VALUES (DSCD.SEQ_DSCD_GROUP_ID.nextval, :name)");
 		query.bindValue(":name", groups[i]);
 
 		if (!query.exec())
@@ -217,25 +245,25 @@ void injectDatas()
 		{
 		case 0:
 			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name) "
-				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name)");
+				"VALUES (DSCD.SEQ_DSCD_ADDRESS_ID.nextval, :name)");
 			query.bindValue(":name", addresses[i].Name);
 			break;
 		case 1:
 			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile) "
-				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile)");
+				"VALUES (DSCD.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile)");
 			query.bindValue(":name", addresses[i].Name);
 			query.bindValue(":mobile", addresses[i].mobile);
 			break;
 		case 2:
 			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2) "
-				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2)");
+				"VALUES (DSCD.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2)");
 			query.bindValue(":name", addresses[i].Name);
 			query.bindValue(":mobile", addresses[i].mobile);
 			query.bindValue(":mobile2", addresses[i].mobile2);
 			break;
 		default:
 			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2, telephone) "
-				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2, :telephone)");
+				"VALUES (DSCD.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2, :telephone)");
 			query.bindValue(":name", addresses[i].Name);
 			query.bindValue(":mobile", addresses[i].mobile);
 			query.bindValue(":mobile2", addresses[i].mobile2);
@@ -280,7 +308,7 @@ void injectDatas()
 		dateTime2.sprintf("2017-%02d-%02d %02d:%02d:%02d", month, day, hour, min, sec);
 
 		query.prepare("INSERT INTO DSCD.RECORDS (id, phone_number, bg_time, ed_time) "
-			"VALUES (SYSTEM.SEQ_DSCD_RECORD_ID.nextval, :phone_number, "
+			"VALUES (DSCD.SEQ_DSCD_RECORD_ID.nextval, :phone_number, "
 			"to_date(:bg_time, 'YYYY-MM-DD HH24:MI:SS'), "
 			"to_date(:ed_time, 'YYYY-MM-DD HH24:MI:SS'))");
 		if (rd() % 3 == 0)
@@ -339,7 +367,11 @@ int main(int argc, char *argv[])
 		qDebug() << "DB connection wrong: " << QSqlDatabase::database("DSCD").lastError().text();
 		return 1;
 	}
-	injectDatas();
+
+	if (initDatabase())
+	{
+		injectDatas();
+	}
 
 	return a.exec();
 }

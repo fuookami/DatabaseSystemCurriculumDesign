@@ -56,4 +56,9 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceFiles\InitDatabaseScript.sql">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

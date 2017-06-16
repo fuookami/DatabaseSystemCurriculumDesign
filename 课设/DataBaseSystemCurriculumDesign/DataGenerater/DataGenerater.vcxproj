@@ -149,6 +149,9 @@
     <Text Include="ResourceFiles\Names.txt" />
     <Text Include="ResourceFiles\TelephoneMac.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ResourceFiles\InitDatabaseScript.sql" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
