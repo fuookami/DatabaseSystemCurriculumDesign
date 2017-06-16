@@ -60,5 +60,8 @@
     <None Include="ResourceFiles\InitDatabaseScript.sql">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ResourceFiles\InitDatabaseScript(Org).sql">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
