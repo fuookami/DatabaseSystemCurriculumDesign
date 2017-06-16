@@ -8,6 +8,7 @@
 #include <QtCore/QTextCodec>
 #include <QtCore/QFile>
 #include <random>
+#include <memory>
 
 QStringList familyNames;
 QStringList names;
@@ -21,6 +22,7 @@ struct Address
 	QString mobile2;
 	QString telephone;
 };
+QVector<Address> addresses;
 
 void createConnectTo(const QString &dataType, const QString &host, const unsigned int port, const QString &dbName, const QString &user, const QString &password)
 {
@@ -106,10 +108,46 @@ bool loadData()
 		&& loadTelephoneMacs();
 }
 
+QString generateMobile()
+{
+	static std::random_device rd;
+	static const unsigned long mobileMacsNum(mobileMacs.size());
+	
+	QString ret("+86");
+	ret += mobileMacs[rd() % mobileMacsNum];
+	for (unsigned int i(0); i != 4; ++i)
+		ret.push_back('0' + rd() % 10);
+	return std::move(ret);
+}
+
+QString generateTelephone()
+{
+	static std::random_device rd;
+	static const unsigned long telephoneMacsNum(telephoneMacs.size());
+
+	QString ret(telephoneMacs[rd() % telephoneMacsNum]);
+	ret.push_back('1' + rd() % 9);
+	for (unsigned int i(0); i != 7; ++i)
+		ret.push_back('0' + rd() % 10);
+	return std::move(ret);
+}
+
 void generateDatas()
 {
 	std::random_device rd;
-
+	static const unsigned long familyNamesNum(familyNames.size());
+	static const unsigned long namesNum(names.size());
+	
+	unsigned int addressNum(50 + rd() % 50);
+	for (unsigned int i(0); i != addressNum; ++i)
+	{
+		addresses.push_back(Address({
+			familyNames[rd() % familyNamesNum] + names[rd() % namesNum],
+			generateMobile(),
+			generateMobile(),
+			generateTelephone()
+		}));
+	}
 }
 
 void injectDatas()
