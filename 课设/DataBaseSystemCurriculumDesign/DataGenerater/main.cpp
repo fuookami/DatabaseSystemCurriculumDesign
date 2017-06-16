@@ -23,6 +23,7 @@ struct Address
 	QString telephone;
 };
 QVector<Address> addresses;
+QVector<QString> groups;
 
 void createConnectTo(const QString &dataType, const QString &host, const unsigned int port, const QString &dbName, const QString &user, const QString &password)
 {
@@ -45,19 +46,21 @@ bool loadNames()
 	while (!file.atEnd())
 	{
 		QString str(file.readLine());
+		str.remove('\n');
 		familyNames.append(str.split(" "));
 	}
 	file.close();
 
-	file.setFileName("ResourceFiles\\FamilyNames.txt");
+	file.setFileName("ResourceFiles\\Names.txt");
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug() << "Can not open ResourceFiles\\FamilyNames.txt\n";
+		qDebug() << "Can not open ResourceFiles\\Names.txt\n";
 		return false;
 	}
 	while (!file.atEnd())
 	{
 		QString str(file.readLine());
+		str.remove('\n');
 		names.append(str.split(" "));
 	}
 	file.close();
@@ -76,6 +79,7 @@ bool loadMobileMacs()
 	while (!file.atEnd())
 	{
 		QString str(file.readLine());
+		str.remove('\n');
 		mobileMacs.push_back(str.split("\t")[0]);
 	}
 	file.close();
@@ -94,6 +98,7 @@ bool loadTelephoneMacs()
 	while (!file.atEnd())
 	{
 		QString str(file.readLine());
+		str.remove('\n');
 		telephoneMacs.push_back(str.split("\t")[0]);
 	}
 	file.close();

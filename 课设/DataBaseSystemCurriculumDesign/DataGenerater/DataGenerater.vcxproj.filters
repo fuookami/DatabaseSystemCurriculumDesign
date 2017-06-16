@@ -52,5 +52,8 @@
     <Text Include="ResourceFiles\TelephoneMac.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Groups.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

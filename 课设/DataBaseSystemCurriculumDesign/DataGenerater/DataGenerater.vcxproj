@@ -143,6 +143,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Groups.txt" />
     <Text Include="ResourceFiles\FamilyNames.txt" />
     <Text Include="ResourceFiles\MobileMac.txt" />
     <Text Include="ResourceFiles\Names.txt" />
