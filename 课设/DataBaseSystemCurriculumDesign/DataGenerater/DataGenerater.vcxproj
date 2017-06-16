@@ -144,7 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource Files\FamilyNames.txt" />
+    <Text Include="Resource Files\MobileMac.txt" />
     <Text Include="Resource Files\Names.txt" />
+    <Text Include="Resource Files\TelephoneMac.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
