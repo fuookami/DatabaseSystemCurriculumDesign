@@ -177,6 +177,8 @@ void generateDatas()
 
 void injectDatas()
 {
+	std::random_device rd;
+
 	QSqlDatabase db(QSqlDatabase::database("DSCD"));
 	db.transaction();
 	QSqlQuery query(db);
@@ -197,18 +199,120 @@ void injectDatas()
 		qDebug() << "Wrong0: " << query.lastError().text() << "\n";
 	}
 
-	for (unsigned long i(0), j(addresses.size()); i != j; ++i)
+	for (unsigned long i(0), j(groups.size()); i != j; ++i)
 	{
-		query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2, telephone) "
-			"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2, :telephone)");
-		query.bindValue(":name", addresses[i].Name);
-		query.bindValue(":mobile", addresses[i].mobile);
-		query.bindValue(":mobile2", addresses[i].mobile2);
-		query.bindValue(":telephone", addresses[i].telephone);
+		query.prepare("INSERT INTO DSCD.GROUPS (id, name) "
+			"VALUES (SYSTEM.SEQ_DSCD_GROUP_ID.nextval, :name)");
+		query.bindValue(":name", groups[i]);
 
 		if (!query.exec())
 		{
 			qDebug() << "Wrong" << i << ": " << query.lastError().text() << "\n";
+		}
+	}
+
+	for (unsigned long i(0), j(addresses.size()); i != j; ++i)
+	{
+		switch (rd() % 4)
+		{
+		case 0:
+			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name) "
+				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name)");
+			query.bindValue(":name", addresses[i].Name);
+			break;
+		case 1:
+			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile) "
+				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile)");
+			query.bindValue(":name", addresses[i].Name);
+			query.bindValue(":mobile", addresses[i].mobile);
+			break;
+		case 2:
+			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2) "
+				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2)");
+			query.bindValue(":name", addresses[i].Name);
+			query.bindValue(":mobile", addresses[i].mobile);
+			query.bindValue(":mobile2", addresses[i].mobile2);
+			break;
+		default:
+			query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2, telephone) "
+				"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2, :telephone)");
+			query.bindValue(":name", addresses[i].Name);
+			query.bindValue(":mobile", addresses[i].mobile);
+			query.bindValue(":mobile2", addresses[i].mobile2);
+			query.bindValue(":telephone", addresses[i].telephone);
+			break;
+		}
+
+		if (!query.exec())
+		{
+			qDebug() << "Wrong" << i << ": " << query.lastError().text() << "\n";
+		}
+
+		if (rd() % 2 == 0)
+		{
+			unsigned int groupId(1 + rd() % groups.size());
+			query.prepare("UPDATE DSCD.ADDRESSES SET group_id = :group_id "
+				"WHERE id = :id");
+			query.bindValue(":group_id", groupId);
+			query.bindValue(":id", (unsigned int)i);
+
+			if (!query.exec())
+			{
+				qDebug() << "Wrong" << i << ": " << query.lastError().text() << "\n";
+			}
+		}
+	}
+
+	unsigned int month(1);
+	unsigned int day(rd() % 10);
+	unsigned int hour(0), min(0), sec(0);
+
+	for (; month <= 12;)
+	{
+		hour = rd() % 24;
+		min = rd() % 40;
+		sec = rd() % 60;
+		QString dateTime1;
+		dateTime1.sprintf("2017-%02d-%02d %02d:%02d:%02d", month, day, hour, min, sec);
+		QString dateTime2;
+		min += rd() % (60 - min);
+		sec = rd() % 60;
+		dateTime2.sprintf("2017-%02d-%02d %02d:%02d:%02d", month, day, hour, min, sec);
+
+		query.prepare("INSERT INTO DSCD.RECORDS (id, phone_number, bg_time, ed_time) "
+			"VALUES (SYSTEM.SEQ_DSCD_RECORD_ID.nextval, :phone_number, "
+			"to_date(:bg_time, 'YYYY-MM-DD HH24:MI:SS'), "
+			"to_date(:ed_time, 'YYYY-MM-DD HH24:MI:SS'))");
+		if (rd() % 3 == 0)
+			switch (rd() % 3 == 0)
+			{
+			case 0:
+				query.bindValue(":phone_number", addresses[rd() % addresses.size()].mobile);
+				break;
+			case 1:
+				query.bindValue(":phone_number", addresses[rd() % addresses.size()].mobile2);
+				break;
+			default:
+				query.bindValue(":phone_number", addresses[rd() % addresses.size()].telephone);
+				break;
+			}
+		else if (rd() % 2 == 0)
+			query.bindValue(":phone_number", generateMobile());
+		else
+			query.bindValue(":phone_number", generateTelephone());
+		query.bindValue(":bg_time", dateTime1);
+		query.bindValue(":ed_time", dateTime2);
+		
+		if (!query.exec())
+		{
+			qDebug() << "Wrong" << dateTime1 << ": " << query.lastError().text() << "\n";
+		}
+
+		day += rd() % 10;
+		if (day > 28)
+		{
+			day -= 28;
+			month += 1;
 		}
 	}
 
