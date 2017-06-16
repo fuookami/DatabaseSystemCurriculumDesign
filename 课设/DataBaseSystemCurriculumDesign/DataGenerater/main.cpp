@@ -18,7 +18,7 @@ QStringList telephoneMacs;
 struct Address
 {
 	QString Name;
-	QString mobile1;
+	QString mobile;
 	QString mobile2;
 	QString telephone;
 };
@@ -167,6 +167,25 @@ void injectDatas()
 	query.bindValue(":mobile", "+8618051018256");
 	query.bindValue(":mobile2", "+8615150666878");
 	query.bindValue(":telephone", "02037361150");
+	if (!query.exec())
+	{
+		qDebug() << "Wrong0: " << query.lastError().text() << "\n";
+	}
+
+	for (unsigned long i(0), j(addresses.size()); i != j; ++i)
+	{
+		query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2, telephone) "
+			"VALUES (SYSTEM.SEQ_DSCD_ADDRESS_ID.nextval, :name, :mobile, :mobile2, :telephone)");
+		query.bindValue(":name", addresses[i].Name);
+		query.bindValue(":mobile", addresses[i].mobile);
+		query.bindValue(":mobile2", addresses[i].mobile2);
+		query.bindValue(":telephone", addresses[i].telephone);
+
+		if (!query.exec())
+		{
+			qDebug() << "Wrong" << i << ": " << query.lastError().text() << "\n";
+		}
+	}
 
 	db.commit();
 }
