@@ -39,4 +39,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource Files\FamilyNames.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Resource Files\Names.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
