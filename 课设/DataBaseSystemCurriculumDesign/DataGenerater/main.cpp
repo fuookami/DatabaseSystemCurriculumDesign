@@ -87,6 +87,25 @@ bool loadMobileMacs()
 	return true;
 }
 
+bool loadGroups()
+{
+	QFile file("ResourceFiles\\Groups.txt");
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Can not open ResourceFiles\\Groups.txt\n";
+		return false;
+	}
+	while (!file.atEnd())
+	{
+		QString str(file.readLine());
+		str.remove('\n');
+		groups.push_back(str);
+	}
+	file.close();
+
+	return true;
+}
+
 bool loadTelephoneMacs()
 {
 	QFile file("ResourceFiles\\TelephoneMac.txt");
@@ -109,6 +128,7 @@ bool loadTelephoneMacs()
 bool loadData()
 {
 	return loadNames()
+		&& loadGroups()
 		&& loadMobileMacs()
 		&& loadTelephoneMacs();
 }
