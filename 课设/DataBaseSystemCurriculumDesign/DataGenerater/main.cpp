@@ -1,4 +1,4 @@
-#include <QtWidgets/QApplication>
+﻿#include <QtWidgets/QApplication>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
@@ -7,23 +7,29 @@
 #include <QtCore/QStringList>
 #include <QtCore/QTextCodec>
 #include <QtCore/QFile>
-#include <QtCore/QSharedPointer>
+#include <random>
 
 QStringList familyNames;
 QStringList names;
 QStringList mobileMacs;
 QStringList telephoneMacs;
 
-QSharedPointer<QSqlDatabase> createConnectTo(const QString &dataType, const QString &host, const unsigned int port, const QString &dbName, const QString &user, const QString &password)
+struct Address
 {
-	QSharedPointer<QSqlDatabase> db(&QSqlDatabase::addDatabase(dataType));
-	db->setHostName(host);
-	db->setPort(port);
-	db->setDatabaseName(dbName);
-	db->setUserName(user);
-	db->setPassword(password);
+	QString Name;
+	QString mobile1;
+	QString mobile2;
+	QString telephone;
+};
 
-	return db;
+void createConnectTo(const QString &dataType, const QString &host, const unsigned int port, const QString &dbName, const QString &user, const QString &password)
+{
+	QSqlDatabase db(QSqlDatabase::addDatabase(dataType, "DSCD"));
+	db.setHostName(host);
+	db.setPort(port);
+	db.setDatabaseName(dbName);
+	db.setUserName(user);
+	db.setPassword(password);
 }
 
 bool loadNames()
@@ -102,14 +108,36 @@ bool loadData()
 
 void generateDatas()
 {
+	std::random_device rd;
 
+}
+
+void injectDatas()
+{
+	QSqlDatabase db(QSqlDatabase::database("DSCD"));
+	db.transaction();
+	QSqlQuery query(db);
+
+	query.exec("DELETE FROM DSCD.ADDRESSES");
+	query.exec("DELETE FROM DSCD.GROUP");
+	query.exec("DELETE FROM DSCD.RECORDS");
+
+	query.prepare("INSERT INTO DSCD.ADDRESSES (id, name, mobile, mobile2, telephone) "
+		"VALUES (:id, :name, :mobile, :mobile2, :telephone)");
+	query.bindValue(":id", 0);
+	query.bindValue(":name", QString::fromLocal8Bit("李伟文"));
+	query.bindValue(":mobile", "+8618051018256");
+	query.bindValue(":mobile2", "+8615150666878");
+	query.bindValue(":telephone", "02037361150");
+
+	db.commit();
 }
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+	QTextCodec *codec = QTextCodec::codecForName("GB2312");
 	QTextCodec::setCodecForLocale(codec);
 	
 	if (!loadData())
@@ -117,13 +145,15 @@ int main(int argc, char *argv[])
 		qDebug() << "Load datas wrong.";
 		return 1;
 	}
+	generateDatas();
 
-	QSharedPointer<QSqlDatabase> db(createConnectTo("QOCI", "127.0.0.1", 1521, "fuookamiDBSD", "fuookami", "a08040228a"));
-	if (!db->open())
+	createConnectTo("QOCI", "127.0.0.1", 1521, "fuookamiDBSD", "DSCD", "a08040228a");
+	if (!QSqlDatabase::database("DSCD").open())
 	{
-		qDebug() << "DB connection wrong: " << db->lastError().text();
+		qDebug() << "DB connection wrong: " << QSqlDatabase::database("DSCD").lastError().text();
 		return 1;
 	}
+	injectDatas();
 
 	return a.exec();
 }
