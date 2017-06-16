@@ -40,16 +40,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource Files\FamilyNames.txt">
+    <Text Include="ResourceFiles\FamilyNames.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Resource Files\Names.txt">
+    <Text Include="ResourceFiles\MobileMac.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Resource Files\MobileMac.txt">
+    <Text Include="ResourceFiles\Names.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Resource Files\TelephoneMac.txt">
+    <Text Include="ResourceFiles\TelephoneMac.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

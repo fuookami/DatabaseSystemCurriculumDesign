@@ -143,10 +143,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource Files\FamilyNames.txt" />
-    <Text Include="Resource Files\MobileMac.txt" />
-    <Text Include="Resource Files\Names.txt" />
-    <Text Include="Resource Files\TelephoneMac.txt" />
+    <Text Include="ResourceFiles\FamilyNames.txt" />
+    <Text Include="ResourceFiles\MobileMac.txt" />
+    <Text Include="ResourceFiles\Names.txt" />
+    <Text Include="ResourceFiles\TelephoneMac.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,7 +5,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-#include <memory>
+#include <QtCore/QTextCodec>
+#include <QtCore/QFile>
 
 QStringList familyNames;
 QStringList names;
@@ -24,33 +25,66 @@ QSqlDatabase *createConnectTo(const QString &dataType, const QString &host, cons
 	return db;
 }
 
-void loadNames()
+bool loadNames()
 {
+	QFile file("ResourceFiles\\FamilyNames.txt");
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Can not open ResourceFiles\\FamilyNames.txt\n";
+		return false;
+	}
+	while (file.atEnd())
+	{
+		QString str(file.readLine());
+		familyNames.append(str.split(" "));
+	}
+	file.close();
 
+	file.setFileName("ResourceFiles\\FamilyNames.txt");
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Can not open ResourceFiles\\FamilyNames.txt\n";
+		return false;
+	}
+	while (file.atEnd())
+	{
+		QString str(file.readLine());
+		names.append(str.split(" "));
+	}
+	file.close();
+
+	return true;
 }
 
-void loadMobileMacs()
+bool loadMobileMacs()
 {
-
+	return true;
 }
 
-void loadTelephoneMacs()
+bool loadTelephoneMacs()
 {
-
+	return true;
 }
 
-void loadData()
+bool loadData()
 {
-	loadNames();
-	loadMobileMacs();
-	loadTelephoneMacs();
+	return loadNames()
+		&& loadMobileMacs()
+		&& loadTelephoneMacs();
 }
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	loadData();
+	QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+	QTextCodec::setCodecForLocale(codec);
+	
+	if (!loadData())
+	{
+		qDebug() << "Load datas wrong.";
+		return 1;
+	}
 
 	QSqlDatabase *db(createConnectTo("QOCI", "127.0.0.1", 1521, "fuookamiDBSD", "fuookami", "a08040228a"));
 	if (!db->open())
