@@ -46,9 +46,6 @@
     <CustomBuild Include="Resources\AdressInfoWidget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Resources\ConnectWidget.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="Resources\MainWidget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -66,9 +63,6 @@
     <ClInclude Include="GeneratedFiles\ui_AdressInfoWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ConnectWidget.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_MainWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -78,5 +72,13 @@
     <ClInclude Include="GeneratedFiles\ui_RecordsWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\MobileMac.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Resources\TelephoneMac.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
