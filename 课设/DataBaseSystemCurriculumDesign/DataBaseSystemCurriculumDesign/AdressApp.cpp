@@ -1,5 +1,9 @@
 #include "AdressApp.h"
 #include <QtCore/QFile>
+#include <QtConcurrent/QtConcurrent>
+
+const QString AddressApp::MobileMacFilePath(QString("Resources\\MobileMac.txt"));
+const QString AddressApp::TelephoneMacFilePath(QString("Resources\\TelephoneMac.txt"));
 
 AddressApp & AddressApp::getReference(void)
 {
@@ -33,10 +37,51 @@ AddressApp::AddressApp()
 
 bool AddressApp::loadSettingDatas()
 {
-	// use qthread
-	// set loading widget to load phoneMacs;
-	// set loading widget to load telephoneMacs;
-	return true;
+	static const auto loadMobileMacs([]() -> bool
+	{
+		QFile file(MobileMacFilePath);
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			//qDebug() << "Can not open ResourceFiles\\TelephoneMac.txt\n";
+			return false;
+		}
+		while (!file.atEnd())
+		{
+			QString str(file.readLine());
+			str.remove('\n');
+			//telephoneMacs.push_back(str.split("\t")[0]);
+		}
+		file.close();
+
+		return true;
+	});
+
+	static const auto loadTelephoneMacs([]() -> bool
+	{
+		QFile file(TelephoneMacFilePath);
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			//qDebug() << "Can not open ResourceFiles\\TelephoneMac.txt\n";
+			return false;
+		}
+		while (!file.atEnd())
+		{
+			QString str(file.readLine());
+			str.remove('\n');
+			//telephoneMacs.push_back(str.split("\t")[0]);
+		}
+		file.close();
+
+		return true;
+	});
+
+	QFuture<bool> loadMobileMacsFuture(QtConcurrent::run(loadMobileMacs));
+	QFuture<bool> loadTelephoneMacsFuture(QtConcurrent::run(loadTelephoneMacs));
+
+	loadMobileMacsFuture.waitForFinished();
+	loadTelephoneMacsFuture.waitForFinished();
+
+	return loadMobileMacsFuture.result() && loadTelephoneMacsFuture.result();
 }
 
 bool AddressApp::connectToDatabase()

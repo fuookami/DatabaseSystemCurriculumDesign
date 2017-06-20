@@ -25,4 +25,8 @@ private:
 	// main window
 	bool opened;
 	QString lastErrorMsg;
+
+private:
+	static const QString MobileMacFilePath;
+	static const QString TelephoneMacFilePath;
 };
