@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'RecordInfoWidget.ui'
+** Form generated from reading UI file 'RecordInfoBtn.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_RECORDINFOWIDGET_H
-#define UI_RECORDINFOWIDGET_H
+#ifndef UI_RECORDINFOBTN_H
+#define UI_RECORDINFOBTN_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -19,25 +19,25 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_RecordInfoWidget
+class Ui_RecordInfoBtn
 {
 public:
     QLabel *PhoneNumber;
     QLabel *TimeLocal;
 
-    void setupUi(QWidget *RecordInfoWidget)
+    void setupUi(QWidget *RecordInfoBtn)
     {
-        if (RecordInfoWidget->objectName().isEmpty())
-            RecordInfoWidget->setObjectName(QStringLiteral("RecordInfoWidget"));
-        RecordInfoWidget->resize(293, 57);
-        PhoneNumber = new QLabel(RecordInfoWidget);
+        if (RecordInfoBtn->objectName().isEmpty())
+            RecordInfoBtn->setObjectName(QStringLiteral("RecordInfoBtn"));
+        RecordInfoBtn->resize(293, 57);
+        PhoneNumber = new QLabel(RecordInfoBtn);
         PhoneNumber->setObjectName(QStringLiteral("PhoneNumber"));
         PhoneNumber->setGeometry(QRect(10, 10, 273, 25));
         QFont font;
         font.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
         font.setPointSize(18);
         PhoneNumber->setFont(font);
-        TimeLocal = new QLabel(RecordInfoWidget);
+        TimeLocal = new QLabel(RecordInfoBtn);
         TimeLocal->setObjectName(QStringLiteral("TimeLocal"));
         TimeLocal->setGeometry(QRect(10, 35, 273, 12));
         QFont font1;
@@ -45,14 +45,14 @@ public:
         font1.setPointSize(9);
         TimeLocal->setFont(font1);
 
-        retranslateUi(RecordInfoWidget);
+        retranslateUi(RecordInfoBtn);
 
-        QMetaObject::connectSlotsByName(RecordInfoWidget);
+        QMetaObject::connectSlotsByName(RecordInfoBtn);
     } // setupUi
 
-    void retranslateUi(QWidget *RecordInfoWidget)
+    void retranslateUi(QWidget *RecordInfoBtn)
     {
-        RecordInfoWidget->setWindowTitle(QApplication::translate("RecordInfoWidget", "RecordInfoWidget", Q_NULLPTR));
+        RecordInfoBtn->setWindowTitle(QApplication::translate("RecordInfoBtn", "RecordInfoBtn", Q_NULLPTR));
         PhoneNumber->setText(QString());
         TimeLocal->setText(QString());
     } // retranslateUi
@@ -60,9 +60,9 @@ public:
 };
 
 namespace Ui {
-    class RecordInfoWidget: public Ui_RecordInfoWidget {};
+    class RecordInfoBtn: public Ui_RecordInfoBtn {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_RECORDINFOWIDGET_H
+#endif // UI_RECORDINFOBTN_H

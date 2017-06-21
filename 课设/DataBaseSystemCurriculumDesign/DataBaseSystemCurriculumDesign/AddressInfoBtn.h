@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Basic.h"
-#include "ui_AdressInfoWidget.h"
+#include "ui_AdressInfoBtn.h"
 #include <QtWidgets/QPushButton>
 
 class AddressInfoBtn : public QPushButton
@@ -9,8 +9,8 @@ class AddressInfoBtn : public QPushButton
 	Q_OBJECT;
 
 public:
-	AddressInfoBtn(int id, const QString &name, const QString &unit, const QString &identity,
-		QWidget *parent = nullptr);
+	AddressInfoBtn(int _id, const QString &_name, const QString _remark, 
+		const QString &_unit, const QString &_identity, QWidget *parent = nullptr);
 	~AddressInfoBtn();
 
 signals:
@@ -21,7 +21,7 @@ private slots:
 
 private:
 	int id;
-	QString name;
+	QString nameRemark;
 	QString unitIdentity;
-	Ui::AdressInfoWidget *ui;
+	Ui::AdressInfoBtn *ui;
 };

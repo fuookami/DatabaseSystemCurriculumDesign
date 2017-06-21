@@ -142,13 +142,7 @@
     <CustomBuild Include="Resources\AdressesWidget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Resources\AdressInfoWidget.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="Resources\MainWidget.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Resources\RecordInfoWidget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="Resources\RecordsWidget.ui">
@@ -181,18 +175,18 @@
     <CustomBuild Include="AddressInfoBtn.h">
       <Filter>Header Files\Widgets\AddressWidgets</Filter>
     </CustomBuild>
+    <CustomBuild Include="Resources\AdressInfoBtn.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\RecordInfoBtn.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_AdressInfoWidget.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_MainWidget.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_RecordInfoWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RecordsWidget.h">
@@ -209,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="RecordDataInterface.h">
       <Filter>Header Files\Widgets\RecordWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AdressInfoBtn.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_RecordInfoBtn.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
