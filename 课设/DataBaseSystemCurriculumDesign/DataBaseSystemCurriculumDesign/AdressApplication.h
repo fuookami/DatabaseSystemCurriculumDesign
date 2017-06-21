@@ -22,6 +22,8 @@ public:
 private:
 	AddressApplication();
 
+	bool connectToDatabase();
+
 private slots:
 	void LoadingMsg(const QString &msg);
 	void LoadingFinish(bool _opened, const QString &_lastErrorMsg);

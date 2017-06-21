@@ -11,7 +11,7 @@ class LoadThread : public QThread
 public:
 	LoadThread(QVector<AddressApp::MobileMac> &_mobileMacs, QVector<AddressApp::TelephoneMac> &_telephoneMacs,
 		AddressApp::Setting &_setting, const QString &_MobileMacFilePath, const QString &_TelephoneMacFilePath,
-		const QString &_SettingFilePathQObject, const QString &_DBName, QObject *parent = nullptr);
+		const QString &_SettingFilePathQObject, QObject *parent = nullptr);
 	~LoadThread() {};
 
 signals:
@@ -24,7 +24,6 @@ protected:
 private:
 	bool loadSettingDatas();
 	static QString generateLoadErrorMsg(const QString &filePath, const quint64 line, const QString &msg);
-	bool connectToDatabase();
 
 private:
 	bool opened;
@@ -37,5 +36,4 @@ private:
 	const QString & MobileMacFilePath; 
 	const QString & TelephoneMacFilePath;
 	const QString & SettingFilePath;
-	const QString & DBName;
 };

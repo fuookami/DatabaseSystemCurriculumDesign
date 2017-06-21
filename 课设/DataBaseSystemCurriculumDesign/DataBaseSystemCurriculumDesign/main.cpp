@@ -10,9 +10,5 @@ int main(int argc, char *argv[])
 	QTextCodec::setCodecForLocale(codec);
 
 	AddressApplication &sys(AddressApplication::getReference());
-	if (!sys.isOpen())
-		return 1;
-
-	sys.run();
 	return a.exec();
 }

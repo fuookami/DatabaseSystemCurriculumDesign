@@ -34,16 +34,36 @@ void AddressApplication::close()
 }
 
 AddressApplication::AddressApplication()
-	: opened(false), lastErrorMsg(), pLoader(new LoaderWidget()),
-	pLoadThread(new LoadThread(mobileMacs, telephoneMacs, setting, MobileMacFilePath, TelephoneMacFilePath, SettingFilePath, DBName))
+	: QObject(nullptr), opened(false), lastErrorMsg(), pLoader(new LoaderWidget()),
+	pLoadThread(new LoadThread(mobileMacs, telephoneMacs, setting, MobileMacFilePath, TelephoneMacFilePath, SettingFilePath))
 {
 	pLoader->show();
-	pLoadThread->start();
-
-	lastErrorMsg.clear();
 
 	connect(pLoadThread, SIGNAL(msg(const QString &)), this, SLOT(LoadingMsg(const QString &)));
-	connect(pLoadThread, SIGNAL(finish(bool, const QString &)), this, SLOT(LoadingFinish(const QString &)));
+	connect(pLoadThread, SIGNAL(finish(bool, const QString &)), this, SLOT(LoadingFinish(bool, const QString &)));
+
+	lastErrorMsg.clear();
+	pLoadThread->start();
+}
+
+bool AddressApplication::connectToDatabase()
+{
+	QSqlDatabase db(QSqlDatabase::addDatabase(setting.databaseType, DBName));
+	db.setHostName(setting.host);
+	db.setPort(setting.port);
+	db.setDatabaseName(setting.databaseName);
+	db.setUserName(setting.user);
+	db.setPassword(setting.password);
+
+	pLoader->setText(QString::fromLocal8Bit("正在链接数据库。"));
+	if (!db.open())
+	{
+		lastErrorMsg += QString("DB connection wrong: ") + db.lastError().text();
+		lastErrorMsg += ".\n";
+		return false;
+	}
+
+	return true;
 }
 
 void AddressApplication::LoadingMsg(const QString &msg)
@@ -53,10 +73,11 @@ void AddressApplication::LoadingMsg(const QString &msg)
 
 void AddressApplication::LoadingFinish(bool _opened, const QString &_lastErrorMsg)
 {
+	pLoadThread->terminate();
 	opened = _opened;
 	lastErrorMsg = _lastErrorMsg;
 
-	if (opened)
+	if (opened && connectToDatabase())
 	{
 		pLoader->setText(QString::fromLocal8Bit("正在初始化。"));
 	}

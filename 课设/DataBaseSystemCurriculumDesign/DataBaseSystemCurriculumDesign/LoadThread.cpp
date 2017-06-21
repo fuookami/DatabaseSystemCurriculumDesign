@@ -8,21 +8,18 @@
 
 LoadThread::LoadThread(QVector<AddressApp::MobileMac>& _mobileMacs, QVector<AddressApp::TelephoneMac>& _telephoneMacs, 
 	AddressApp::Setting & _setting, const QString & _MobileMacFilePath, const QString & _TelephoneMacFilePath, 
-	const QString & _SettingFilePath, const QString & _DBName, QObject * parent)
+	const QString & _SettingFilePath, QObject * parent)
 	: opened(false), lastErrorMsg(),
 	mobileMacs(_mobileMacs), telephoneMacs(_telephoneMacs), setting(_setting),
-	MobileMacFilePath(_MobileMacFilePath), TelephoneMacFilePath(_TelephoneMacFilePath), SettingFilePath(_SettingFilePath),
-	DBName(_DBName), QThread(parent)
+	MobileMacFilePath(_MobileMacFilePath), TelephoneMacFilePath(_TelephoneMacFilePath), 
+	SettingFilePath(_SettingFilePath), QThread(parent)
 {
 	
 }
 
 void LoadThread::run()
 {
-	if (loadSettingDatas() && connectToDatabase())
-	{
-		opened = true;
-	}
+	opened = loadSettingDatas();
 
 	emit finish(opened, lastErrorMsg);
 }
@@ -155,14 +152,14 @@ bool LoadThread::loadSettingDatas()
 	QFuture<bool> loadTelephoneMacsFuture(QtConcurrent::run(loadTelephoneMacs));
 	QFuture<bool> loadSettingFuture(QtConcurrent::run(loadSetting));
 
-	emit msg(QString::fromLocal8Bit("正在读取手机区位码数据。"));
-	bool result1(loadMobileMacsFuture.result());
+	emit msg(QString::fromLocal8Bit("正在读取系统设置。"));
+	bool result3(loadSettingFuture.result());
 
 	emit msg(QString::fromLocal8Bit("正在读取座机区位码数据。"));
 	bool result2(loadTelephoneMacsFuture.result());
 
-	emit msg(QString::fromLocal8Bit("正在读取系统设置。"));
-	bool result3(loadSettingFuture.result());
+	emit msg(QString::fromLocal8Bit("正在读取手机区位码数据。"));
+	bool result1(loadMobileMacsFuture.result());
 
 	return result1 && result2 && result3;
 }
@@ -171,24 +168,4 @@ QString LoadThread::generateLoadErrorMsg(const QString & filePath, const quint64
 {
 	return QString("In file \"%1\" Line %2: %3.\n")
 		.arg(filePath).arg(line).arg(msg);
-}
-
-bool LoadThread::connectToDatabase()
-{
-	QSqlDatabase db(QSqlDatabase::addDatabase(setting.databaseType, DBName));
-	db.setHostName(setting.host);
-	db.setPort(setting.port);
-	db.setDatabaseName(setting.databaseName);
-	db.setUserName(setting.user);
-	db.setPassword(setting.password);
-
-	emit msg(QString::fromLocal8Bit("正在链接数据库。"));
-	if (!db.open())
-	{
-		lastErrorMsg += QString("DB connection wrong: ") + db.lastError().text();
-		lastErrorMsg += ".\n";
-		return false;
-	}
-
-	return true;
 }
