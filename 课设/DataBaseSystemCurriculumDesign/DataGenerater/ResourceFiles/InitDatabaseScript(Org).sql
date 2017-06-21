@@ -15,7 +15,7 @@ CREATE TABLE DSCD.Addresses (
   identity  NVARCHAR2(40) DEFAULT NULL,
   remark    NVARCHAR2(40) DEFAULT NULL,
   email     NCLOB         DEFAULT NULL,
-  group_id  INTEGER       DEFAULT NULL
+  group_id  INTEGER       DEFAULT (0) NOT NULL
 );
 
 DROP TABLE DSCD.Records;
@@ -24,7 +24,7 @@ CREATE TABLE DSCD.Records (
   phone_number VARCHAR2(20) NOT NULL,
   bg_time      TIMESTAMP    NOT NULL,
   ed_time      TIMESTAMP    NOT NULL,
-  address_id   INTEGER,
+  address_id   INTEGER      DEFAULT NULL,
   CHECK (ed_time > bg_time)
 );
 

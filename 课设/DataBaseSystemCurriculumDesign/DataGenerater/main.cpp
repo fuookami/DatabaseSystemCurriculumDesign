@@ -282,7 +282,7 @@ void injectDatas()
 			query.prepare("UPDATE DSCD.ADDRESSES SET group_id = :group_id "
 				"WHERE id = :id");
 			query.bindValue(":group_id", groupId);
-			query.bindValue(":id", (unsigned int)i);
+			query.bindValue(":id", (unsigned int)i + 1);
 
 			if (!query.exec())
 			{
