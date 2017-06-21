@@ -1,7 +1,13 @@
 #include "AdressApplication.h"
 #include <QtCore/QFile>
 #include <QtConcurrent/QtConcurrent>
+#include <QtSql/QSqlDatabase>
+#include <QtWidgets/QMessageBox>
 #include <memory>
+
+const QString AddressApplication::MobileMacFilePath("Resources\\MobileMac.txt");
+const QString AddressApplication::TelephoneMacFilePath("Resources\\TelephoneMac.txt");
+const QString AddressApplication::SettingFilePath("Resources\\Setting.txt");
 
 AddressApplication & AddressApplication::getReference(void)
 {
@@ -23,14 +29,14 @@ AddressApplication::AddressApplication()
 	:	opened(false),
 		lastErrorMsg()
 {
+	lastErrorMsg.clear();
 	if (loadSettingDatas() && connectToDatabase())
 	{
-		// right
+		opened = true;
+		// set loading widget to init
 	}
 	else
-	{
-		// something wrong
-	}
+		QMessageBox::information(nullptr, QString::fromLocal8Bit("´íÎó"), lastErrorMsg);
 }
 
 bool AddressApplication::loadSettingDatas()
@@ -117,29 +123,91 @@ bool AddressApplication::loadSettingDatas()
 		return true;
 	});
 
-	lastErrorMsg.clear();
+	static const auto loadSetting([](QString *errorMsg) -> bool
+	{
+		QFile file(SettingFilePath);
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			*errorMsg += QString("Can not open ") + SettingFilePath + "\n";
+			return false;
+		}
+
+		QStringList settingStrs;
+		while (!file.atEnd())
+		{
+			QString str(file.readLine());
+			str.remove('\n');
+
+			QStringList strs(str.split(" "));
+			if (strs.size() == 3)
+			{
+				settingStrs.append(strs[2]);
+			}
+			else
+			{
+				*errorMsg += generateLoadErrorMsg(SettingFilePath, settingStrs.size() + 1, "data is wrong");
+				file.close();
+				settingStrs.clear();
+				return false;
+			}
+		}
+		file.close();
+
+		if (settingStrs.size() != 6)
+		{
+			*errorMsg += QString("In file \"") + SettingFilePath + QString("\": Data has been inserted or deleted.\n");
+			settingStrs.clear();
+			return false;
+		}
+
+		setting = AddressApp::Setting(settingStrs[0], settingStrs[1], settingStrs[2].toUInt(), settingStrs[3], settingStrs[4],
+			settingStrs[5]);
+		settingStrs.clear();
+		return true;
+	});
+
 	QFuture<bool> loadMobileMacsFuture(QtConcurrent::run(loadMobileMacs, &lastErrorMsg));
 	QFuture<bool> loadTelephoneMacsFuture(QtConcurrent::run(loadTelephoneMacs, &lastErrorMsg));
+	QFuture<bool> loadSettingFuture(QtConcurrent::run(loadSetting, &lastErrorMsg));
 
 	loadMobileMacsFuture.waitForFinished();
+	// set loading widget to load mobile mac
 	loadTelephoneMacsFuture.waitForFinished();
+	// set loading widget to load mobile mac
+	loadSettingFuture.waitForFinished();
+	// set loading widget to load mobile mac
 
-	return loadMobileMacsFuture.result() && loadTelephoneMacsFuture.result();
+	return loadMobileMacsFuture.result() && loadTelephoneMacsFuture.result() && loadSettingFuture.result();
 }
 
-QString AddressApplication::generateLoadErrorMsg(const QString & filePath, unsigned long line, const QString & msg)
+QString AddressApplication::generateLoadErrorMsg(const QString & filePath, const quint64 line, const QString & msg)
 {
-	QString newErrorMsg;
-	/*
-	*errorMsg += QString("In file \"") + MobileMacFilePath + QString("\" ");
-	*errorMsg += QString("Line ") + QString::fromStdString(std::to_string()) + QString(": ");
-	*errorMsg += QString("mac is invalid.\n");
-	*/
-	return std::move(newErrorMsg);
+	QByteArray block;
+	QDataStream out(&block, QIODevice::WriteOnly);
+	out.setVersion(QDataStream::Qt_5_8);
+
+	out << "In file \"" << filePath << "\" ";
+	out << "Line " << line << ": ";
+	out << msg << ".\n";
+
+	return std::move(QString(block));
 }
 
 bool AddressApplication::connectToDatabase()
 {
-	// set loading widget to connectToDatabase
-	return false;
+	QSqlDatabase db(QSqlDatabase::addDatabase(setting.databaseType, DBName));
+	db.setHostName(setting.host);
+	db.setPort(setting.port);
+	db.setDatabaseName(setting.databaseName);
+	db.setUserName(setting.user);
+	db.setPassword(setting.password);
+
+	if (!db.open())
+	{
+		lastErrorMsg += QString("DB connection wrong: ") + db.lastError().text();
+		lastErrorMsg += ".\n";
+		return false;
+	}
+
+	return true;
 }

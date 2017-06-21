@@ -19,7 +19,7 @@ private:
 	AddressApplication();
 
 	bool loadSettingDatas();
-	static QString generateLoadErrorMsg(const QString &filePath, unsigned long line, const QString &msg);
+	static QString generateLoadErrorMsg(const QString &filePath, const quint64 line, const QString &msg);
 	bool connectToDatabase();
 
 private:
@@ -31,6 +31,10 @@ private:
 private:
 	static QVector<AddressApp::MobileMac> mobileMacs;
 	static QVector<AddressApp::TelephoneMac> telephoneMacs;
+	static AddressApp::Setting setting;
+
 	static const QString MobileMacFilePath;
 	static const QString TelephoneMacFilePath;
+	static const QString SettingFilePath;
+	static const QString DBName;
 };

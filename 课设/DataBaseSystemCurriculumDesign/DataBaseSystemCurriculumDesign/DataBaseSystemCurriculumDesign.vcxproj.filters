@@ -98,5 +98,8 @@
     <Text Include="Resources\TelephoneMac.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Resources\Setting.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

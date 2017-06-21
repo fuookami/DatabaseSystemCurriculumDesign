@@ -11,11 +11,7 @@ int main(int argc, char *argv[])
 
 	AddressApplication &sys(AddressApplication::getReference());
 	if (!sys.isOpen())
-	{
-		// warning
-		// show lastError
 		return 1;
-	}
 
 	sys.run();
 	return a.exec();

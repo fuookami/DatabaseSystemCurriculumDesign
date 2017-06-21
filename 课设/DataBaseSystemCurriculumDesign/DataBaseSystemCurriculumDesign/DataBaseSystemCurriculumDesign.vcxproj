@@ -257,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\MobileMac.txt" />
+    <Text Include="Resources\Setting.txt" />
     <Text Include="Resources\TelephoneMac.txt" />
   </ItemGroup>
   <ItemGroup>

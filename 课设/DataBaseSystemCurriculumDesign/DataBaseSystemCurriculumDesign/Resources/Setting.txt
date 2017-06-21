@@ -1,0 +1,6 @@
+DatabaseType = QOCI
+Host = 127.0.0.1
+Port = 1521
+DatabaseName = fuookamiDBSD
+User = DSCD
+Password = a08040228a
