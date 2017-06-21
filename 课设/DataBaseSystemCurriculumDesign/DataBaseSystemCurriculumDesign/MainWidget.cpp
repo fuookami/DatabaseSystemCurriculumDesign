@@ -6,8 +6,10 @@ const QString MainWidget::MainWidgetBgiFilePath("Resources\\MainWidgetBgi.jpg");
 const unsigned int MainWidget::winWidth = 848;
 const unsigned int MainWidget::winHeight = 480;
 
-MainWidget::MainWidget(QWidget *parent /* = nullptr */)
+MainWidget::MainWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> _telephoneMacs,
+	const QString &_DBName, QWidget *parent /* = nullptr */)
 	: QMainWindow(parent), ui(new Ui::MainWidget()),
+	mobileMacs(_mobileMacs), telephoneMacs(_telephoneMacs), DBName(_DBName),
 	bgiPix(new QPixmap(MainWidgetBgiFilePath)),
 	winFadeIn(new QPropertyAnimation(this, "windowOpacity"))
 {

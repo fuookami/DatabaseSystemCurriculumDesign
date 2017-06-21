@@ -42,6 +42,7 @@ public:
         SiderBgi = new QLabel(AdressesWidget);
         SiderBgi->setObjectName(QStringLiteral("SiderBgi"));
         SiderBgi->setGeometry(QRect(0, 0, 310, 442));
+        SiderBgi->setAutoFillBackground(true);
         SiderBgi->setStyleSheet(QStringLiteral("background-color: rgb(204, 204, 204);"));
         Title = new QLabel(AdressesWidget);
         Title->setObjectName(QStringLiteral("Title"));

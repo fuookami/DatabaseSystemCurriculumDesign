@@ -60,7 +60,7 @@ bool AddressApplication::connectToDatabase()
 
 void AddressApplication::run()
 {
-	pMainWid = new MainWidget();
+	pMainWid = new MainWidget(mobileMacs, telephoneMacs, DBName);
 	pMainWid->show();
 	pLoader->close();
 }

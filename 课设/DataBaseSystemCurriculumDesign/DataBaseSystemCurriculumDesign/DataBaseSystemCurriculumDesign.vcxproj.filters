@@ -125,6 +125,18 @@
     <ClCompile Include="RecordDataInterface.cpp">
       <Filter>Source Files\Widget\RecordWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RecordInfoBtn.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RecordInfoBtn.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddressInfoBtn.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddressInfoBtn.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -163,6 +175,12 @@
     <CustomBuild Include="RecordWidget.h">
       <Filter>Header Files\Widgets\RecordWidgets</Filter>
     </CustomBuild>
+    <CustomBuild Include="RecordInfoBtn.h">
+      <Filter>Header Files\Widgets\RecordWidgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddressInfoBtn.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h">
@@ -183,20 +201,11 @@
     <ClInclude Include="Basic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DatabaseInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_LoaderWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="AddressInfoBtn.h">
-      <Filter>Header Files\Widgets\AddressWidgets</Filter>
-    </ClInclude>
     <ClInclude Include="AddressDataInterface.h">
       <Filter>Header Files\Widgets\AddressWidgets</Filter>
-    </ClInclude>
-    <ClInclude Include="RecordInfoBtn.h">
-      <Filter>Header Files\Widgets\RecordWidgets</Filter>
     </ClInclude>
     <ClInclude Include="RecordDataInterface.h">
       <Filter>Header Files\Widgets\RecordWidgets</Filter>

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Basic.h"
 #include "ui_MainWidget.h"
 #include "AddressWidget.h"
 #include "RecordWidget.h"
@@ -14,7 +15,8 @@ class MainWidget : public QMainWindow
 	Q_OBJECT;
 
 public:
-	MainWidget(QWidget *parent = nullptr);
+	MainWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> _telephoneMacs,
+	const QString &_DBName, QWidget *parent = nullptr);
 	~MainWidget();
 
 private slots:
@@ -30,6 +32,10 @@ private:
 	static const unsigned int winHeight;
 	static const unsigned int winWidth;
 	static const QString MainWidgetBgiFilePath;
+
+	const QVector<AddressApp::MobileMac> &mobileMacs;
+	const QVector<AddressApp::TelephoneMac> &telephoneMacs; 
+	const QString &DBName;
 
 	QPropertyAnimation *winFadeIn;
 	QPixmap *bgiPix;

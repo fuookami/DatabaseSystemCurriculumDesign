@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,12 +22,28 @@ QT_BEGIN_NAMESPACE
 class Ui_RecordInfoWidget
 {
 public:
+    QLabel *PhoneNumber;
+    QLabel *TimeLocal;
 
     void setupUi(QWidget *RecordInfoWidget)
     {
         if (RecordInfoWidget->objectName().isEmpty())
             RecordInfoWidget->setObjectName(QStringLiteral("RecordInfoWidget"));
-        RecordInfoWidget->resize(400, 300);
+        RecordInfoWidget->resize(293, 57);
+        PhoneNumber = new QLabel(RecordInfoWidget);
+        PhoneNumber->setObjectName(QStringLiteral("PhoneNumber"));
+        PhoneNumber->setGeometry(QRect(10, 10, 273, 25));
+        QFont font;
+        font.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
+        font.setPointSize(18);
+        PhoneNumber->setFont(font);
+        TimeLocal = new QLabel(RecordInfoWidget);
+        TimeLocal->setObjectName(QStringLiteral("TimeLocal"));
+        TimeLocal->setGeometry(QRect(10, 35, 273, 12));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
+        font1.setPointSize(9);
+        TimeLocal->setFont(font1);
 
         retranslateUi(RecordInfoWidget);
 
@@ -36,6 +53,8 @@ public:
     void retranslateUi(QWidget *RecordInfoWidget)
     {
         RecordInfoWidget->setWindowTitle(QApplication::translate("RecordInfoWidget", "RecordInfoWidget", Q_NULLPTR));
+        PhoneNumber->setText(QString());
+        TimeLocal->setText(QString());
     } // retranslateUi
 
 };

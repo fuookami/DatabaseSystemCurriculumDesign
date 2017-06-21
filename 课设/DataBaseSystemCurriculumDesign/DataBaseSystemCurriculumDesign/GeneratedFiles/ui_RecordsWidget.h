@@ -38,6 +38,8 @@ public:
         SiderBgi = new QLabel(RecordsWidget);
         SiderBgi->setObjectName(QStringLiteral("SiderBgi"));
         SiderBgi->setGeometry(QRect(2, 0, 310, 442));
+        SiderBgi->setAutoFillBackground(true);
+        SiderBgi->setStyleSheet(QStringLiteral("background-color: rgb(204, 204, 204);"));
         Container = new QScrollArea(RecordsWidget);
         Container->setObjectName(QStringLiteral("Container"));
         Container->setGeometry(QRect(312, 0, 493, 442));
@@ -57,11 +59,13 @@ public:
         InfoContainer = new QScrollArea(RecordsWidget);
         InfoContainer->setObjectName(QStringLiteral("InfoContainer"));
         InfoContainer->setGeometry(QRect(10, 60, 293, 382));
+        InfoContainer->setStyleSheet(QLatin1String("background-color: rgba(255, 255, 255, 0);\n"
+"border: none;"));
         InfoContainer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         InfoContainer->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 291, 380));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 293, 382));
         InfoContainer->setWidget(scrollAreaWidgetContents);
 
         retranslateUi(RecordsWidget);
