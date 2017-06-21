@@ -59,6 +59,21 @@
     <ClCompile Include="LoaderWidget.cpp">
       <Filter>Source Files\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LoadThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LoadThread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AdressApplication.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AdressApplication.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -82,6 +97,12 @@
     <CustomBuild Include="LoaderWidget.h">
       <Filter>Header Files\Widgets</Filter>
     </CustomBuild>
+    <CustomBuild Include="LoadThread.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AdressApplication.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h">
@@ -100,9 +121,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="Basic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AdressApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DatabaseInterface.h">

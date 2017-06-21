@@ -18,8 +18,8 @@ bool AddressApp::checkMobileMac(const QString & mobileMac)
 
 bool AddressApp::checkTelephoneMac(const QString & telephoneMac)
 {
-	if (telephoneMac.size() != 3 
-		|| telephoneMac.size() != 4 
+	if ((telephoneMac.size() != 3 
+		&& telephoneMac.size() != 4) 
 		|| telephoneMac[0] != QChar('0')
 		|| telephoneMac[1] == QChar('0'))
 	{

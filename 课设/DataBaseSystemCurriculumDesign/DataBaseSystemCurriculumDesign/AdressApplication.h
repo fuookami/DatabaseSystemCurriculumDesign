@@ -1,11 +1,15 @@
 #pragma once
 
 #include "Basic.h"
+#include "LoadThread.h"
 #include "LoaderWidget.h"
+#include <QtCore/QObject>
 #include <QtCore/QVector>
 
-class AddressApplication
+class AddressApplication : public QObject
 {
+	Q_OBJECT;
+
 public:
 	static AddressApplication &getReference(void);
 
@@ -18,12 +22,14 @@ public:
 private:
 	AddressApplication();
 
-	bool loadSettingDatas();
-	static QString generateLoadErrorMsg(const QString &filePath, const quint64 line, const QString &msg);
-	bool connectToDatabase();
+private slots:
+	void LoadingMsg(const QString &msg);
+	void LoadingFinish(bool _opened, const QString &_lastErrorMsg);
 
 private:
+	LoadThread *pLoadThread;
 	LoaderWidget *pLoader;
+
 	// main window
 	bool opened;
 	QString lastErrorMsg;
