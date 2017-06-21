@@ -1,13 +1,14 @@
 #pragma once
 
-#include <QtCore/QString>
+#include "Basic.h"
+#include <QtCore/QVector>
 
-class AddressApp
+class AddressApplication
 {
 public:
-	static AddressApp &getReference(void);
+	static AddressApplication &getReference(void);
 
-	~AddressApp();
+	~AddressApplication();
 
 	inline bool isOpen() const;
 	inline const QString &lastError() const;
@@ -15,7 +16,7 @@ public:
 	void close();
 
 private:
-	AddressApp();
+	AddressApplication();
 
 	bool loadSettingDatas();
 	bool connectToDatabase();
@@ -27,6 +28,8 @@ private:
 	QString lastErrorMsg;
 
 private:
+	static QVector<AddressApp::MobileMac> mobileMacs;
+	static QVector<AddressApp::TelephoneMac> telephoneMacs;
 	static const QString MobileMacFilePath;
 	static const QString TelephoneMacFilePath;
 };

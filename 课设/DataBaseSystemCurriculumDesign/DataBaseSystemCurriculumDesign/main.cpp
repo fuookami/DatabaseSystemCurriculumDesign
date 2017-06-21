@@ -1,4 +1,4 @@
-#include "AdressApp.h"
+#include "AdressApplication.h"
 #include <QtWidgets/QApplication>
 #include <QtCore/QTextCodec>
 
@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	QTextCodec *codec = QTextCodec::codecForName("GB2312");
 	QTextCodec::setCodecForLocale(codec);
 
-	AddressApp &sys(AddressApp::getReference());
+	AddressApplication &sys(AddressApplication::getReference());
 	if (!sys.isOpen())
 	{
 		// warning

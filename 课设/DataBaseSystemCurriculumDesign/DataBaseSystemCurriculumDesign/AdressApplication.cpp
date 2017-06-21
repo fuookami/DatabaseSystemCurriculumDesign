@@ -2,26 +2,24 @@
 #include <QtCore/QFile>
 #include <QtConcurrent/QtConcurrent>
 
-const QString AddressApp::MobileMacFilePath(QString("Resources\\MobileMac.txt"));
-const QString AddressApp::TelephoneMacFilePath(QString("Resources\\TelephoneMac.txt"));
 
-AddressApp & AddressApp::getReference(void)
+AddressApplication & AddressApplication::getReference(void)
 {
-	static AddressApp sys;
+	static AddressApplication sys;
 	return sys;
 }
 
-inline bool AddressApp::isOpen() const
+inline bool AddressApplication::isOpen() const
 {
 	return opened;
 }
 
-inline const QString & AddressApp::lastError() const
+inline const QString & AddressApplication::lastError() const
 {
 	return lastErrorMsg;
 }
 
-AddressApp::AddressApp()
+AddressApplication::AddressApplication()
 	:	opened(false),
 		lastErrorMsg()
 {
@@ -35,7 +33,7 @@ AddressApp::AddressApp()
 	}
 }
 
-bool AddressApp::loadSettingDatas()
+bool AddressApplication::loadSettingDatas()
 {
 	static const auto loadMobileMacs([]() -> bool
 	{
@@ -84,7 +82,7 @@ bool AddressApp::loadSettingDatas()
 	return loadMobileMacsFuture.result() && loadTelephoneMacsFuture.result();
 }
 
-bool AddressApp::connectToDatabase()
+bool AddressApplication::connectToDatabase()
 {
 	// set loading widget to connectToDatabase
 	return false;

@@ -141,7 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdressApp.cpp" />
+    <ClCompile Include="AdressApplication.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +165,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdressApp.h" />
+    <ClInclude Include="AdressApplication.h" />
+    <ClInclude Include="Basic.h" />
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_AdressInfoWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_LoadingWidget.h" />
