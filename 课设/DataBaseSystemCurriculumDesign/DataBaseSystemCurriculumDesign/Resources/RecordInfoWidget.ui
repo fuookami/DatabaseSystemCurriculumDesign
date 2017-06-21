@@ -29,7 +29,7 @@
     </font>
    </property>
    <property name="text">
-    <string>+86 180 5101 8256</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="TimeLocal">
@@ -48,7 +48,7 @@
     </font>
    </property>
    <property name="text">
-    <string>2017年6月20日 19:00:12 - 19:00:13 江苏南京</string>
+    <string/>
    </property>
   </widget>
  </widget>

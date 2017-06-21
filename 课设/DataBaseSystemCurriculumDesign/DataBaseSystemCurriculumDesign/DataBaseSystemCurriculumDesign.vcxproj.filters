@@ -113,6 +113,18 @@
     <ClCompile Include="RecordWidget.cpp">
       <Filter>Source Files\Widget\RecordWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="AddressInfoBtn.cpp">
+      <Filter>Source Files\Widget\AddressWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressDataInterface.cpp">
+      <Filter>Source Files\Widget\AddressWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordInfoBtn.cpp">
+      <Filter>Source Files\Widget\RecordWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordDataInterface.cpp">
+      <Filter>Source Files\Widget\RecordWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -176,6 +188,18 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_LoaderWidget.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressInfoBtn.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressDataInterface.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordInfoBtn.h">
+      <Filter>Header Files\Widgets\RecordWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="RecordDataInterface.h">
+      <Filter>Header Files\Widgets\RecordWidgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
