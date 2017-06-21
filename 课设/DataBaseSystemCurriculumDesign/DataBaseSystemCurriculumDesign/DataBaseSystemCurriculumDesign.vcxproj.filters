@@ -33,6 +33,12 @@
       <Extensions>qrc;*</Extensions>
       <ParseFiles>false</ParseFiles>
     </Filter>
+    <Filter Include="Header Files\Widgets">
+      <UniqueIdentifier>{794156f6-00d1-44e6-8a99-b2ebf243e932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loader">
+      <UniqueIdentifier>{573046ea-7bbb-447c-9207-aef4cbffc76b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,6 +49,15 @@
     </ClCompile>
     <ClCompile Include="Basic.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LoaderWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LoaderWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="LoaderWidget.cpp">
+      <Filter>Source Files\Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,8 +76,11 @@
     <CustomBuild Include="Resources\RecordsWidget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="Resources\LoadingWidget.ui">
+    <CustomBuild Include="Resources\LoaderWidget.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LoaderWidget.h">
+      <Filter>Header Files\Widgets</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -81,9 +99,6 @@
     <ClInclude Include="GeneratedFiles\ui_RecordsWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_LoadingWidget.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="Basic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -92,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="DatabaseInterface.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_LoaderWidget.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

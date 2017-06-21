@@ -2,12 +2,18 @@
 #include <QtCore/QFile>
 #include <QtConcurrent/QtConcurrent>
 #include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlError>
 #include <QtWidgets/QMessageBox>
 #include <memory>
+
+QVector<AddressApp::MobileMac> AddressApplication::mobileMacs;
+QVector<AddressApp::TelephoneMac> AddressApplication::telephoneMacs;
+AddressApp::Setting AddressApplication::setting;
 
 const QString AddressApplication::MobileMacFilePath("Resources\\MobileMac.txt");
 const QString AddressApplication::TelephoneMacFilePath("Resources\\TelephoneMac.txt");
 const QString AddressApplication::SettingFilePath("Resources\\Setting.txt");
+const QString AddressApplication::DBName("DSCD");
 
 AddressApplication & AddressApplication::getReference(void)
 {
@@ -15,38 +21,44 @@ AddressApplication & AddressApplication::getReference(void)
 	return sys;
 }
 
-inline bool AddressApplication::isOpen() const
+AddressApplication::~AddressApplication()
 {
-	return opened;
 }
 
-inline const QString & AddressApplication::lastError() const
+void AddressApplication::run()
 {
-	return lastErrorMsg;
+}
+
+void AddressApplication::close()
+{
 }
 
 AddressApplication::AddressApplication()
-	:	opened(false),
-		lastErrorMsg()
+	: opened(false), lastErrorMsg(), pLoader(new LoaderWidget())
 {
+	pLoader->show();
+
 	lastErrorMsg.clear();
 	if (loadSettingDatas() && connectToDatabase())
 	{
 		opened = true;
-		// set loading widget to init
+		pLoader->setText(QString::fromLocal8Bit("正在初始化。"));
 	}
 	else
+	{
 		QMessageBox::information(nullptr, QString::fromLocal8Bit("错误"), lastErrorMsg);
+		pLoader->close();
+	}
 }
 
 bool AddressApplication::loadSettingDatas()
 {
-	static const auto loadMobileMacs([](QString *errorMsg) -> bool
+	static const auto loadMobileMacs([this]() -> bool
 	{
 		QFile file(MobileMacFilePath);
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			*errorMsg += QString("Can not open ") + MobileMacFilePath + '\n';
+			this->lastErrorMsg += QString("Can not open ") + MobileMacFilePath + '\n';
 			return false;
 		}
 		while (!file.atEnd())
@@ -63,7 +75,7 @@ bool AddressApplication::loadSettingDatas()
 				}
 				else
 				{
-					*errorMsg += generateLoadErrorMsg(MobileMacFilePath, mobileMacs.size() + 1, "mac is invalid");
+					this->lastErrorMsg += generateLoadErrorMsg(MobileMacFilePath, mobileMacs.size() + 1, "mac is invalid");
 					file.close();
 					mobileMacs.clear();
 					return false;
@@ -71,7 +83,7 @@ bool AddressApplication::loadSettingDatas()
 			}
 			else
 			{
-				*errorMsg += generateLoadErrorMsg(MobileMacFilePath, mobileMacs.size() + 1, "data is wrong");
+				this->lastErrorMsg += generateLoadErrorMsg(MobileMacFilePath, mobileMacs.size() + 1, "data is wrong");
 				file.close();
 				mobileMacs.clear();
 				return false;
@@ -82,12 +94,12 @@ bool AddressApplication::loadSettingDatas()
 		return true;
 	});
 
-	static const auto loadTelephoneMacs([](QString *errorMsg) -> bool
+	static const auto loadTelephoneMacs([this]() -> bool
 	{
 		QFile file(TelephoneMacFilePath);
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			*errorMsg += QString("Can not open ") + TelephoneMacFilePath + '\n';
+			this->lastErrorMsg += QString("Can not open ") + TelephoneMacFilePath + '\n';
 			return false;
 		}
 		while (!file.atEnd())
@@ -104,7 +116,7 @@ bool AddressApplication::loadSettingDatas()
 				}
 				else
 				{
-					*errorMsg += generateLoadErrorMsg(TelephoneMacFilePath, mobileMacs.size() + 1, "mac is invalid");
+					this->lastErrorMsg += generateLoadErrorMsg(TelephoneMacFilePath, mobileMacs.size() + 1, "mac is invalid");
 					file.close();
 					telephoneMacs.clear();
 					return false;
@@ -112,7 +124,7 @@ bool AddressApplication::loadSettingDatas()
 			}
 			else
 			{
-				*errorMsg += generateLoadErrorMsg(TelephoneMacFilePath, mobileMacs.size() + 1, "data is wrong");
+				this->lastErrorMsg += generateLoadErrorMsg(TelephoneMacFilePath, mobileMacs.size() + 1, "data is wrong");
 				file.close();
 				telephoneMacs.clear();
 				return false;
@@ -123,12 +135,12 @@ bool AddressApplication::loadSettingDatas()
 		return true;
 	});
 
-	static const auto loadSetting([](QString *errorMsg) -> bool
+	static const auto loadSetting([this]() -> bool
 	{
 		QFile file(SettingFilePath);
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 		{
-			*errorMsg += QString("Can not open ") + SettingFilePath + "\n";
+			this->lastErrorMsg += QString("Can not open ") + SettingFilePath + "\n";
 			return false;
 		}
 
@@ -145,7 +157,7 @@ bool AddressApplication::loadSettingDatas()
 			}
 			else
 			{
-				*errorMsg += generateLoadErrorMsg(SettingFilePath, settingStrs.size() + 1, "data is wrong");
+				this->lastErrorMsg += generateLoadErrorMsg(SettingFilePath, settingStrs.size() + 1, "data is wrong");
 				file.close();
 				settingStrs.clear();
 				return false;
@@ -155,7 +167,7 @@ bool AddressApplication::loadSettingDatas()
 
 		if (settingStrs.size() != 6)
 		{
-			*errorMsg += QString("In file \"") + SettingFilePath + QString("\": Data has been inserted or deleted.\n");
+			this->lastErrorMsg += QString("In file \"") + SettingFilePath + QString("\": Data has been inserted or deleted.\n");
 			settingStrs.clear();
 			return false;
 		}
@@ -166,16 +178,16 @@ bool AddressApplication::loadSettingDatas()
 		return true;
 	});
 
-	QFuture<bool> loadMobileMacsFuture(QtConcurrent::run(loadMobileMacs, &lastErrorMsg));
-	QFuture<bool> loadTelephoneMacsFuture(QtConcurrent::run(loadTelephoneMacs, &lastErrorMsg));
-	QFuture<bool> loadSettingFuture(QtConcurrent::run(loadSetting, &lastErrorMsg));
+	QFuture<bool> loadMobileMacsFuture(QtConcurrent::run(loadMobileMacs));
+	QFuture<bool> loadTelephoneMacsFuture(QtConcurrent::run(loadTelephoneMacs));
+	QFuture<bool> loadSettingFuture(QtConcurrent::run(loadSetting));
 
 	loadMobileMacsFuture.waitForFinished();
-	// set loading widget to load mobile mac
+	pLoader->setText(QString::fromLocal8Bit("正在读取手机区位码数据。"));
 	loadTelephoneMacsFuture.waitForFinished();
-	// set loading widget to load mobile mac
+	pLoader->setText(QString::fromLocal8Bit("正在读取座机区位码数据。"));
 	loadSettingFuture.waitForFinished();
-	// set loading widget to load mobile mac
+	pLoader->setText(QString::fromLocal8Bit("正在读取系统设置。"));
 
 	return loadMobileMacsFuture.result() && loadTelephoneMacsFuture.result() && loadSettingFuture.result();
 }
@@ -190,7 +202,7 @@ QString AddressApplication::generateLoadErrorMsg(const QString & filePath, const
 	out << "Line " << line << ": ";
 	out << msg << ".\n";
 
-	return std::move(QString(block));
+	return std::move(QString::fromFormat());
 }
 
 bool AddressApplication::connectToDatabase()
@@ -202,6 +214,7 @@ bool AddressApplication::connectToDatabase()
 	db.setUserName(setting.user);
 	db.setPassword(setting.password);
 
+	pLoader->setText(QString::fromLocal8Bit("正在链接数据库。"));
 	if (!db.open())
 	{
 		lastErrorMsg += QString("DB connection wrong: ") + db.lastError().text();

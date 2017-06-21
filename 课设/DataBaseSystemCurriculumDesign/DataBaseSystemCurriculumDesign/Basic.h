@@ -7,6 +7,7 @@ namespace AddressApp
 {
 	struct MobileMac
 	{
+		MobileMac() {};
 		MobileMac(const QStringList &strs)
 			: mac(strs[0]), local(strs[1]), service(strs[2]) {}
 		MobileMac(const QString &_mac, const QString &_local, const QString &_service)
@@ -19,6 +20,7 @@ namespace AddressApp
 
 	struct TelephoneMac
 	{
+		TelephoneMac() {};
 		TelephoneMac(const QStringList &strs)
 			: mac(strs[0]), local(strs[1]) {}
 		TelephoneMac(const QString _mac, const QString _local)

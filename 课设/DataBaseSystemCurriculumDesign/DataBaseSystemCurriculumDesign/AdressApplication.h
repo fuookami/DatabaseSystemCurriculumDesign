@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Basic.h"
+#include "LoaderWidget.h"
 #include <QtCore/QVector>
 
 class AddressApplication
@@ -10,8 +11,7 @@ public:
 
 	~AddressApplication();
 
-	inline bool isOpen() const;
-	inline const QString &lastError() const;
+	inline bool isOpen() const { return opened; }
 	void run();
 	void close();
 
@@ -23,7 +23,7 @@ private:
 	bool connectToDatabase();
 
 private:
-	// loading window
+	LoaderWidget *pLoader;
 	// main window
 	bool opened;
 	QString lastErrorMsg;
