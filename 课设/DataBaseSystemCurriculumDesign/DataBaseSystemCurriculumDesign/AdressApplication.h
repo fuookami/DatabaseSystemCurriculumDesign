@@ -19,6 +19,7 @@ private:
 	AddressApplication();
 
 	bool loadSettingDatas();
+	static QString generateLoadErrorMsg(const QString &filePath, unsigned long line, const QString &msg);
 	bool connectToDatabase();
 
 private:
