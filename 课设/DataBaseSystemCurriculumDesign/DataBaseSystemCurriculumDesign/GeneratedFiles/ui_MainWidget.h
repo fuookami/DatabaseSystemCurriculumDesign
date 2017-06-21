@@ -14,6 +14,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,12 +23,46 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWidget
 {
 public:
+    QLabel *bgi;
+    QWidget *Container;
+    QPushButton *AddressBtn;
+    QPushButton *RecoredBtn;
+    QLabel *AddressSider;
+    QLabel *RecordSider;
+    QPushButton *CloseBtn;
 
     void setupUi(QWidget *MainWidget)
     {
         if (MainWidget->objectName().isEmpty())
             MainWidget->setObjectName(QStringLiteral("MainWidget"));
-        MainWidget->resize(400, 300);
+        MainWidget->resize(848, 480);
+        bgi = new QLabel(MainWidget);
+        bgi->setObjectName(QStringLiteral("bgi"));
+        bgi->setGeometry(QRect(0, 0, 848, 480));
+        Container = new QWidget(MainWidget);
+        Container->setObjectName(QStringLiteral("Container"));
+        Container->setGeometry(QRect(142, 38, 706, 442));
+        AddressBtn = new QPushButton(MainWidget);
+        AddressBtn->setObjectName(QStringLiteral("AddressBtn"));
+        AddressBtn->setGeometry(QRect(5, 40, 40, 40));
+        AddressBtn->setCursor(QCursor(Qt::PointingHandCursor));
+        AddressBtn->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
+        RecoredBtn = new QPushButton(MainWidget);
+        RecoredBtn->setObjectName(QStringLiteral("RecoredBtn"));
+        RecoredBtn->setGeometry(QRect(5, 80, 40, 40));
+        RecoredBtn->setCursor(QCursor(Qt::PointingHandCursor));
+        RecoredBtn->setContextMenuPolicy(Qt::DefaultContextMenu);
+        RecoredBtn->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
+        AddressSider = new QLabel(MainWidget);
+        AddressSider->setObjectName(QStringLiteral("AddressSider"));
+        AddressSider->setGeometry(QRect(0, 45, 5, 30));
+        RecordSider = new QLabel(MainWidget);
+        RecordSider->setObjectName(QStringLiteral("RecordSider"));
+        RecordSider->setGeometry(QRect(0, 85, 5, 30));
+        CloseBtn = new QPushButton(MainWidget);
+        CloseBtn->setObjectName(QStringLiteral("CloseBtn"));
+        CloseBtn->setGeometry(QRect(824, 10, 15, 15));
+        CloseBtn->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
 
         retranslateUi(MainWidget);
 
@@ -36,6 +72,12 @@ public:
     void retranslateUi(QWidget *MainWidget)
     {
         MainWidget->setWindowTitle(QApplication::translate("MainWidget", "MainWidget", Q_NULLPTR));
+        bgi->setText(QString());
+        AddressBtn->setText(QString());
+        RecoredBtn->setText(QString());
+        AddressSider->setText(QString());
+        RecordSider->setText(QString());
+        CloseBtn->setText(QString());
     } // retranslateUi
 
 };

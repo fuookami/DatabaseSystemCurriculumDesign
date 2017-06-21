@@ -9,6 +9,6 @@ int main(int argc, char *argv[])
 	QTextCodec *codec = QTextCodec::codecForName("GB2312");
 	QTextCodec::setCodecForLocale(codec);
 
-	AddressApplication &sys(AddressApplication::getReference());
+	//AddressApplication &sys(AddressApplication::getReference());
 	return a.exec();
 }

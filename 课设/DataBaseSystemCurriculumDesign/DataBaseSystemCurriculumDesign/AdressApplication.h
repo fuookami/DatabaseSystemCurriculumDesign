@@ -15,10 +15,6 @@ public:
 
 	~AddressApplication();
 
-	inline bool isOpen() const { return opened; }
-	void run();
-	void close();
-
 private:
 	AddressApplication();
 

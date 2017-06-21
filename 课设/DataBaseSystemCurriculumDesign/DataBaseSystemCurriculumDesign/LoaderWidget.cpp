@@ -46,6 +46,7 @@ void LoaderWidget::setText(const QString & str)
 
 void LoaderWidget::winFadeInOver(void)
 {
+	disconnect(winFadeIn);
 	delete winFadeIn;
 	winFadeIn = nullptr;
 

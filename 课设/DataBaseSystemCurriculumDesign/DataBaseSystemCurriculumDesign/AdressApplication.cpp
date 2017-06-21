@@ -25,14 +25,6 @@ AddressApplication::~AddressApplication()
 {
 }
 
-void AddressApplication::run()
-{
-}
-
-void AddressApplication::close()
-{
-}
-
 AddressApplication::AddressApplication()
 	: QObject(nullptr), opened(false), lastErrorMsg(), pLoader(new LoaderWidget()),
 	pLoadThread(new LoadThread(mobileMacs, telephoneMacs, setting, MobileMacFilePath, TelephoneMacFilePath, SettingFilePath))
