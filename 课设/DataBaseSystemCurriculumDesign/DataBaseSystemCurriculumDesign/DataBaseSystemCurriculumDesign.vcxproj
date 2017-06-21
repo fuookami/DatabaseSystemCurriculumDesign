@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="AdressApplication.h" />
     <ClInclude Include="Basic.h" />
+    <ClInclude Include="DatabaseInterface.h" />
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_AdressInfoWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_LoadingWidget.h" />

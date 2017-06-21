@@ -42,6 +42,15 @@ namespace AddressApp
 		QString password;
 	};
 
+	namespace Modules
+	{
+		struct Group
+		{
+			unsigned long id;
+			QString name;
+		};
+	}
+
 	bool checkMobileMac(const QString &mobileMac);
 	bool checkTelephoneMac(const QString &telephoneMac);
 }
