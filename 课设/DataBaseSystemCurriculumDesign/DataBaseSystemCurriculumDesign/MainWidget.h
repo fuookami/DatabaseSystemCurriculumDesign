@@ -15,6 +15,9 @@ public:
 	MainWidget(QWidget *parent = nullptr);
 	~MainWidget();
 
+private slots:
+	void closeSlot(void);
+
 private:
 	static const unsigned int winHeight;
 	static const unsigned int winWidth;

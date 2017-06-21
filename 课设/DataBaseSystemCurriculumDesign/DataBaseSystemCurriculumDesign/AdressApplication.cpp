@@ -58,6 +58,13 @@ bool AddressApplication::connectToDatabase()
 	return true;
 }
 
+void AddressApplication::run()
+{
+	pMainWid = new MainWidget();
+	pMainWid->show();
+	pLoader->close();
+}
+
 void AddressApplication::LoadingMsg(const QString &msg)
 {
 	pLoader->setText(msg);
@@ -72,6 +79,7 @@ void AddressApplication::LoadingFinish(bool _opened, const QString &_lastErrorMs
 	if (opened && connectToDatabase())
 	{
 		pLoader->setText(QString::fromLocal8Bit("正在初始化。"));
+		run();
 	}
 	else
 	{

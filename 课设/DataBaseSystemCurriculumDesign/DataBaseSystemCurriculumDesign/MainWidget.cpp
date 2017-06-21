@@ -1,12 +1,14 @@
 #include "MainWidget.h"
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QDesktopWidget>
 
-const QString MainWidgetBgiFilePath("Resources\\MainWidgetBgi.jpg");
-const unsigned int winWidth = 480;
-const unsigned int winHeight = 848;
+const QString MainWidget::MainWidgetBgiFilePath("Resources\\MainWidgetBgi.jpg");
+const unsigned int MainWidget::winWidth = 848;
+const unsigned int MainWidget::winHeight = 480;
 
-MainWidget::MainWidget(QWidget *parent = nullptr)
-	: QMainWindow(parent), ui(new Ui::MainWidget()), 
-	bgiPix(new QPixMap(MainWidgetBgiFilePath)),
+MainWidget::MainWidget(QWidget *parent /* = nullptr */)
+	: QMainWindow(parent), ui(new Ui::MainWidget()),
+	bgiPix(new QPixmap(MainWidgetBgiFilePath)),
 	winFadeIn(new QPropertyAnimation(this, "windowOpacity"))
 {
 	ui->setupUi(this);
@@ -26,6 +28,7 @@ MainWidget::MainWidget(QWidget *parent = nullptr)
 	winFadeIn->setEndValue(1);
 	winFadeIn->setEasingCurve(QEasingCurve::InOutCubic);
 	winFadeIn->start();
+
 	connect(winFadeIn, SIGNAL(finished()), this, SLOT(winFadeInOver()));
 }
 
@@ -33,9 +36,16 @@ MainWidget::~MainWidget()
 {
 }
 
-void MainWidget::winFadeIn()
+void MainWidget::closeSlot()
+{
+	this->close();
+}
+
+void MainWidget::winFadeInOver()
 {
 	disconnect(winFadeIn);
 	delete winFadeIn;
 	winFadeIn = nullptr;
+
+	connect(ui->CloseBtn, SIGNAL(clicked()), this, SLOT(closeSlot()));
 }

@@ -3,6 +3,7 @@
 #include "Basic.h"
 #include "LoadThread.h"
 #include "LoaderWidget.h"
+#include "MainWidget.h"
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 
@@ -19,6 +20,7 @@ private:
 	AddressApplication();
 
 	bool connectToDatabase();
+	void run();
 
 private slots:
 	void LoadingMsg(const QString &msg);
@@ -27,8 +29,8 @@ private slots:
 private:
 	LoadThread *pLoadThread;
 	LoaderWidget *pLoader;
-
-	// main window
+	MainWidget *pMainWid;
+	
 	bool opened;
 	QString lastErrorMsg;
 

@@ -2,7 +2,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDesktopWidget>
 
-
 const QString LoaderWidget::LoaderWidgetBgiFilePath("Resources\\Loader.jpg");
 
 LoaderWidget::LoaderWidget(QWidget *parent /* = nullptr */)

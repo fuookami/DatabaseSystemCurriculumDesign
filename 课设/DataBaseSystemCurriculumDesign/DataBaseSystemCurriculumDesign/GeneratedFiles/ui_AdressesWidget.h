@@ -14,6 +14,10 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,12 +25,89 @@ QT_BEGIN_NAMESPACE
 class Ui_AdressesWidget
 {
 public:
+    QLabel *SiderBgi;
+    QLabel *Title;
+    QPushButton *AddBtn;
+    QLineEdit *SearchLineEdit;
+    QScrollArea *InfoContainer;
+    QWidget *scrollAreaWidgetContents;
+    QScrollArea *Container;
+    QWidget *scrollAreaWidgetContents_2;
 
     void setupUi(QWidget *AdressesWidget)
     {
         if (AdressesWidget->objectName().isEmpty())
             AdressesWidget->setObjectName(QStringLiteral("AdressesWidget"));
-        AdressesWidget->resize(400, 300);
+        AdressesWidget->resize(803, 442);
+        SiderBgi = new QLabel(AdressesWidget);
+        SiderBgi->setObjectName(QStringLiteral("SiderBgi"));
+        SiderBgi->setGeometry(QRect(0, 0, 310, 442));
+        Title = new QLabel(AdressesWidget);
+        Title->setObjectName(QStringLiteral("Title"));
+        Title->setGeometry(QRect(10, 10, 120, 40));
+        QFont font;
+        font.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
+        font.setPointSize(28);
+        Title->setFont(font);
+        AddBtn = new QPushButton(AdressesWidget);
+        AddBtn->setObjectName(QStringLiteral("AddBtn"));
+        AddBtn->setGeometry(QRect(260, 10, 40, 40));
+        QFont font1;
+        font1.setFamily(QStringLiteral("Segoe UI"));
+        font1.setPointSize(32);
+        font1.setBold(false);
+        font1.setWeight(50);
+        AddBtn->setFont(font1);
+        AddBtn->setCursor(QCursor(Qt::PointingHandCursor));
+        AddBtn->setStyleSheet(QLatin1String("QPushButton {\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
+"	border:none;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgba(255, 255, 255, 0.3);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"	background-color: rgba(255, 255, 255, 0.5);\n"
+"}"));
+        AddBtn->setFlat(false);
+        SearchLineEdit = new QLineEdit(AdressesWidget);
+        SearchLineEdit->setObjectName(QStringLiteral("SearchLineEdit"));
+        SearchLineEdit->setGeometry(QRect(10, 60, 290, 30));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
+        font2.setPointSize(12);
+        SearchLineEdit->setFont(font2);
+        SearchLineEdit->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"	background-color: rgbs(255, 255, 255, 0);\n"
+"	placeholder: \"\346\220\234\347\264\242\";\n"
+"}\n"
+"QLineEdit:focus {\n"
+"	border: 1px solid rgb(126, 132, 255);\n"
+"}\n"
+"QLineEdit:hover {\n"
+"	border-size: 3px solid rgb(0, 0, 0);\n"
+"}"));
+        SearchLineEdit->setFrame(true);
+        SearchLineEdit->setCursorPosition(0);
+        SearchLineEdit->setDragEnabled(false);
+        InfoContainer = new QScrollArea(AdressesWidget);
+        InfoContainer->setObjectName(QStringLiteral("InfoContainer"));
+        InfoContainer->setGeometry(QRect(8, 100, 293, 342));
+        InfoContainer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        InfoContainer->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 291, 340));
+        InfoContainer->setWidget(scrollAreaWidgetContents);
+        Container = new QScrollArea(AdressesWidget);
+        Container->setObjectName(QStringLiteral("Container"));
+        Container->setGeometry(QRect(310, 0, 493, 442));
+        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        Container->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 491, 440));
+        Container->setWidget(scrollAreaWidgetContents_2);
 
         retranslateUi(AdressesWidget);
 
@@ -36,6 +117,10 @@ public:
     void retranslateUi(QWidget *AdressesWidget)
     {
         AdressesWidget->setWindowTitle(QApplication::translate("AdressesWidget", "AdressesWidget", Q_NULLPTR));
+        SiderBgi->setText(QString());
+        Title->setText(QApplication::translate("AdressesWidget", "\350\201\224\347\263\273\344\272\272", Q_NULLPTR));
+        AddBtn->setText(QApplication::translate("AdressesWidget", "+", Q_NULLPTR));
+        SearchLineEdit->setPlaceholderText(QApplication::translate("AdressesWidget", "\346\220\234\347\264\242", Q_NULLPTR));
     } // retranslateUi
 
 };

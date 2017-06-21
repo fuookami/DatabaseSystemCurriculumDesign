@@ -14,6 +14,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,12 +23,46 @@ QT_BEGIN_NAMESPACE
 class Ui_RecordsWidget
 {
 public:
+    QLabel *SiderBgi;
+    QScrollArea *Container;
+    QWidget *scrollAreaWidgetContents_2;
+    QLabel *Title;
+    QScrollArea *InfoContainer;
+    QWidget *scrollAreaWidgetContents;
 
     void setupUi(QWidget *RecordsWidget)
     {
         if (RecordsWidget->objectName().isEmpty())
             RecordsWidget->setObjectName(QStringLiteral("RecordsWidget"));
-        RecordsWidget->resize(400, 300);
+        RecordsWidget->resize(803, 442);
+        SiderBgi = new QLabel(RecordsWidget);
+        SiderBgi->setObjectName(QStringLiteral("SiderBgi"));
+        SiderBgi->setGeometry(QRect(2, 0, 310, 442));
+        Container = new QScrollArea(RecordsWidget);
+        Container->setObjectName(QStringLiteral("Container"));
+        Container->setGeometry(QRect(312, 0, 493, 442));
+        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        Container->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 491, 440));
+        Container->setWidget(scrollAreaWidgetContents_2);
+        Title = new QLabel(RecordsWidget);
+        Title->setObjectName(QStringLiteral("Title"));
+        Title->setGeometry(QRect(12, 10, 151, 40));
+        QFont font;
+        font.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
+        font.setPointSize(28);
+        Title->setFont(font);
+        InfoContainer = new QScrollArea(RecordsWidget);
+        InfoContainer->setObjectName(QStringLiteral("InfoContainer"));
+        InfoContainer->setGeometry(QRect(10, 60, 293, 382));
+        InfoContainer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        InfoContainer->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 291, 380));
+        InfoContainer->setWidget(scrollAreaWidgetContents);
 
         retranslateUi(RecordsWidget);
 
@@ -36,6 +72,8 @@ public:
     void retranslateUi(QWidget *RecordsWidget)
     {
         RecordsWidget->setWindowTitle(QApplication::translate("RecordsWidget", "RecordsWidget", Q_NULLPTR));
+        SiderBgi->setText(QString());
+        Title->setText(QApplication::translate("RecordsWidget", "\351\200\232\350\257\235\350\256\260\345\275\225", Q_NULLPTR));
     } // retranslateUi
 
 };
