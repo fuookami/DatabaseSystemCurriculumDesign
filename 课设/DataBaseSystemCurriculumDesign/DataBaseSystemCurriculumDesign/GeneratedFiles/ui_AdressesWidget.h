@@ -42,6 +42,7 @@ public:
         SiderBgi = new QLabel(AdressesWidget);
         SiderBgi->setObjectName(QStringLiteral("SiderBgi"));
         SiderBgi->setGeometry(QRect(0, 0, 310, 442));
+        SiderBgi->setStyleSheet(QStringLiteral("background-color: rgb(204, 204, 204);"));
         Title = new QLabel(AdressesWidget);
         Title->setObjectName(QStringLiteral("Title"));
         Title->setGeometry(QRect(10, 10, 120, 40));
@@ -64,10 +65,10 @@ public:
 "	border:none;\n"
 "}\n"
 "QPushButton:hover {\n"
-"	background-color: rgba(255, 255, 255, 0.3);\n"
+"	background-color: rgba(0, 0, 0, 0.2);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"	background-color: rgba(255, 255, 255, 0.5);\n"
+"	background-color: rgba(0, 0, 0, 0.3);\n"
 "}"));
         AddBtn->setFlat(false);
         SearchLineEdit = new QLineEdit(AdressesWidget);
@@ -77,15 +78,15 @@ public:
         font2.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
         font2.setPointSize(12);
         SearchLineEdit->setFont(font2);
-        SearchLineEdit->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+        SearchLineEdit->setStyleSheet(QLatin1String("QLineEdit {\n"
+"	border: 1px solid rgb(0, 0, 0);\n"
 "	background-color: rgbs(255, 255, 255, 0);\n"
-"	placeholder: \"\346\220\234\347\264\242\";\n"
 "}\n"
 "QLineEdit:focus {\n"
-"	border: 1px solid rgb(126, 132, 255);\n"
+"	border: 2px solid rgb(126, 132, 255);\n"
 "}\n"
 "QLineEdit:hover {\n"
-"	border-size: 3px solid rgb(0, 0, 0);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
 "}"));
         SearchLineEdit->setFrame(true);
         SearchLineEdit->setCursorPosition(0);
@@ -93,11 +94,13 @@ public:
         InfoContainer = new QScrollArea(AdressesWidget);
         InfoContainer->setObjectName(QStringLiteral("InfoContainer"));
         InfoContainer->setGeometry(QRect(8, 100, 293, 342));
+        InfoContainer->setStyleSheet(QLatin1String("background-color: rgba(255, 255, 255, 0);\n"
+"border: none;"));
         InfoContainer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         InfoContainer->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 291, 340));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 293, 342));
         InfoContainer->setWidget(scrollAreaWidgetContents);
         Container = new QScrollArea(AdressesWidget);
         Container->setObjectName(QStringLiteral("Container"));

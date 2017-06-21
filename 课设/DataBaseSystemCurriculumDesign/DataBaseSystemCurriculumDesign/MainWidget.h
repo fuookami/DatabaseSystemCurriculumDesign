@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ui_MainWidget.h"
+#include "AddressWidget.h"
+#include "RecordWidget.h"
 #include <QtWidgets/QMainWindow>
 #include <QtCore/QString>
 #include <QtGui/QPixmap>
@@ -17,6 +19,12 @@ public:
 
 private slots:
 	void closeSlot(void);
+	void addressSlot(void);
+	void recordSlot(void);
+
+private:
+	void setBtnSiderActivePalette(QLabel *l);
+	void setBtnSiderUnactivePalette(QLabel *l);
 
 private:
 	static const unsigned int winHeight;
@@ -27,6 +35,8 @@ private:
 	QPixmap *bgiPix;
 
 	Ui::MainWidget *ui;
+	AddressWidget *addressWidget;
+	RecordWidget *recordWidget;
 
 private slots:
 	void winFadeInOver();

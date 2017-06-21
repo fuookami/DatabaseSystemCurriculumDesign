@@ -22,6 +22,12 @@
      <height>442</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(204, 204, 204);</string>
+   </property>
    <property name="text">
     <string/>
    </property>
@@ -71,10 +77,10 @@
 	border:none;
 }
 QPushButton:hover {
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 QPushButton:pressed {
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(0, 0, 0, 0.3);
 }</string>
    </property>
    <property name="text">
@@ -101,14 +107,14 @@ QPushButton:pressed {
    </property>
    <property name="styleSheet">
     <string notr="true">QLineEdit {
+	border: 1px solid rgb(0, 0, 0);
 	background-color: rgbs(255, 255, 255, 0);
-	placeholder: &quot;搜索&quot;;
 }
 QLineEdit:focus {
-	border: 1px solid rgb(126, 132, 255);
+	border: 2px solid rgb(126, 132, 255);
 }
 QLineEdit:hover {
-	border-size: 3px solid rgb(0, 0, 0);
+	border: 2px solid rgb(0, 0, 0);
 }</string>
    </property>
    <property name="frame">
@@ -133,6 +139,10 @@ QLineEdit:hover {
      <height>342</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(255, 255, 255, 0);
+border: none;</string>
+   </property>
    <property name="verticalScrollBarPolicy">
     <enum>Qt::ScrollBarAsNeeded</enum>
    </property>
@@ -144,8 +154,8 @@ QLineEdit:hover {
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>291</width>
-      <height>340</height>
+      <width>293</width>
+      <height>342</height>
      </rect>
     </property>
    </widget>

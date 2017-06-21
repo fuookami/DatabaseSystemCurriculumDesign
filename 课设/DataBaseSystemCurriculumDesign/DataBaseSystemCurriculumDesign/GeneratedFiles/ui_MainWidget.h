@@ -16,6 +16,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,12 +25,13 @@ class Ui_MainWidget
 {
 public:
     QLabel *bgi;
-    QWidget *Container;
     QPushButton *AddressBtn;
     QPushButton *RecoredBtn;
     QLabel *AddressSider;
     QLabel *RecordSider;
     QPushButton *CloseBtn;
+    QScrollArea *Container;
+    QWidget *scrollAreaWidgetContents;
 
     void setupUi(QWidget *MainWidget)
     {
@@ -39,9 +41,6 @@ public:
         bgi = new QLabel(MainWidget);
         bgi->setObjectName(QStringLiteral("bgi"));
         bgi->setGeometry(QRect(0, 0, 848, 480));
-        Container = new QWidget(MainWidget);
-        Container->setObjectName(QStringLiteral("Container"));
-        Container->setGeometry(QRect(45, 38, 803, 442));
         AddressBtn = new QPushButton(MainWidget);
         AddressBtn->setObjectName(QStringLiteral("AddressBtn"));
         AddressBtn->setGeometry(QRect(0, 40, 45, 40));
@@ -77,22 +76,37 @@ public:
         RecoredBtn->setFlat(false);
         AddressSider = new QLabel(MainWidget);
         AddressSider->setObjectName(QStringLiteral("AddressSider"));
-        AddressSider->setGeometry(QRect(0, 45, 5, 30));
+        AddressSider->setGeometry(QRect(0, 50, 5, 20));
+        AddressSider->setAutoFillBackground(true);
+        AddressSider->setStyleSheet(QStringLiteral(""));
         RecordSider = new QLabel(MainWidget);
         RecordSider->setObjectName(QStringLiteral("RecordSider"));
-        RecordSider->setGeometry(QRect(0, 95, 5, 30));
+        RecordSider->setGeometry(QRect(0, 100, 5, 20));
+        RecordSider->setAutoFillBackground(true);
+        RecordSider->setStyleSheet(QStringLiteral(""));
         CloseBtn = new QPushButton(MainWidget);
         CloseBtn->setObjectName(QStringLiteral("CloseBtn"));
         CloseBtn->setGeometry(QRect(824, 8, 15, 15));
         CloseBtn->setCursor(QCursor(Qt::PointingHandCursor));
         CloseBtn->setStyleSheet(QStringLiteral("background-color: rgba(255, 255, 255, 0);"));
-        Container->raise();
+        Container = new QScrollArea(MainWidget);
+        Container->setObjectName(QStringLiteral("Container"));
+        Container->setGeometry(QRect(45, 38, 803, 442));
+        Container->setStyleSheet(QStringLiteral("border: none;"));
+        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        Container->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        Container->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 803, 442));
+        Container->setWidget(scrollAreaWidgetContents);
         bgi->raise();
         AddressBtn->raise();
         RecoredBtn->raise();
-        AddressSider->raise();
-        RecordSider->raise();
         CloseBtn->raise();
+        Container->raise();
+        RecordSider->raise();
+        AddressSider->raise();
 
         retranslateUi(MainWidget);
 

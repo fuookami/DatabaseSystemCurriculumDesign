@@ -36,8 +36,20 @@
     <Filter Include="Header Files\Widgets">
       <UniqueIdentifier>{794156f6-00d1-44e6-8a99-b2ebf243e932}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Loader">
+    <Filter Include="Header Files\Widgets\AddressWidgets">
+      <UniqueIdentifier>{3ec27045-0e6f-4822-92a8-c3d483815fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widget">
       <UniqueIdentifier>{573046ea-7bbb-447c-9207-aef4cbffc76b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widget\AddressWidgets">
+      <UniqueIdentifier>{10d697fb-9cff-4cdf-af90-158e3f5af319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Widgets\RecordWidgets">
+      <UniqueIdentifier>{7c277deb-9616-4c02-baa2-e20c4bff8b66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widget\RecordWidgets">
+      <UniqueIdentifier>{8d56df6d-1253-40bb-a11a-2193ead56886}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +69,7 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="LoaderWidget.cpp">
-      <Filter>Source Files\Loader</Filter>
+      <Filter>Source Files\Widget</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_LoadThread.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -81,7 +93,25 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="MainWidget.cpp">
-      <Filter>Source Files\Loader</Filter>
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddressWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddressWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RecordWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RecordWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressWidget.cpp">
+      <Filter>Source Files\Widget\AddressWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordWidget.cpp">
+      <Filter>Source Files\Widget\RecordWidgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +144,12 @@
     </CustomBuild>
     <CustomBuild Include="MainWidget.h">
       <Filter>Header Files\Widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddressWidget.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RecordWidget.h">
+      <Filter>Header Files\Widgets\RecordWidgets</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

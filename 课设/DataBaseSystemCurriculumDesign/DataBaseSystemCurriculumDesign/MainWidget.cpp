@@ -29,11 +29,48 @@ MainWidget::MainWidget(QWidget *parent /* = nullptr */)
 	winFadeIn->setEasingCurve(QEasingCurve::InOutCubic);
 	winFadeIn->start();
 
+	setBtnSiderUnactivePalette(ui->AddressSider);
+	setBtnSiderUnactivePalette(ui->RecordSider);
+
 	connect(winFadeIn, SIGNAL(finished()), this, SLOT(winFadeInOver()));
 }
 
 MainWidget::~MainWidget()
 {
+}
+
+void MainWidget::addressSlot(void)
+{
+	setBtnSiderActivePalette(ui->AddressSider);
+	setBtnSiderUnactivePalette(ui->RecordSider);
+
+	addressWidget = new AddressWidget();
+	ui->Container->setWidget(addressWidget);
+	addressWidget->show();
+}
+
+void MainWidget::recordSlot(void)
+{
+	setBtnSiderUnactivePalette(ui->AddressSider);
+	setBtnSiderActivePalette(ui->RecordSider);
+
+	recordWidget = new RecordWidget();
+	ui->Container->setWidget(recordWidget);
+	recordWidget->show();
+}
+
+void MainWidget::setBtnSiderActivePalette(QLabel *l)
+{
+	QPalette palette(l->palette());
+	palette.setColor(QPalette::Background, QColor(163, 73, 73));
+	l->setPalette(palette);
+}
+
+void MainWidget::setBtnSiderUnactivePalette(QLabel *l)
+{
+	QPalette palette(l->palette());
+	palette.setColor(QPalette::Background, QColor(135, 133, 136));
+	l->setPalette(palette);
 }
 
 void MainWidget::closeSlot()
@@ -48,4 +85,6 @@ void MainWidget::winFadeInOver()
 	winFadeIn = nullptr;
 
 	connect(ui->CloseBtn, SIGNAL(clicked()), this, SLOT(closeSlot()));
+	connect(ui->AddressBtn, SIGNAL(clicked()), this, SLOT(addressSlot()));
+	connect(ui->RecoredBtn, SIGNAL(clicked()), this, SLOT(recordSlot()));
 }
