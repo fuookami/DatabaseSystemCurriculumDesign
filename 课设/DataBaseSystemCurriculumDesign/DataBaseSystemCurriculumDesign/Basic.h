@@ -3,6 +3,7 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QDateTime>
+#include <QtCore/QSharedPointer>
 
 namespace AddressApp
 {
@@ -44,37 +45,6 @@ namespace AddressApp
 		QString user;
 		QString password;
 	};
-
-	namespace Modules
-	{
-		struct Group
-		{
-			QString name;
-		};
-
-		struct Address
-		{
-			int id;
-			QString name;
-			QString mobile1;
-			QString mobile2;
-			QString telephone;
-			QString unit;
-			QString identity;
-			QString remark;
-			QString email;
-			QString group_name;
-		};
-
-		struct Records
-		{
-			int id;
-			QString phone_number;
-			QDateTime bg_time;
-			QDateTime ed_time;
-			QString address_name;
-		};
-	}
 
 	bool checkMobileMac(const QString &mobileMac);
 	bool checkTelephoneMac(const QString &telephoneMac);
