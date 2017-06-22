@@ -353,7 +353,7 @@ int main(int argc, char *argv[])
 
 	QTextCodec *codec = QTextCodec::codecForName("GB2312");
 	QTextCodec::setCodecForLocale(codec);
-	
+
 	if (!loadData())
 	{
 		qDebug() << "Load datas wrong.";

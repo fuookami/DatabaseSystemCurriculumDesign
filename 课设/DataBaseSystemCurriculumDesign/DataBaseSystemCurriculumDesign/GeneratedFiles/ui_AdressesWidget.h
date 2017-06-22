@@ -38,7 +38,7 @@ public:
     {
         if (AdressesWidget->objectName().isEmpty())
             AdressesWidget->setObjectName(QStringLiteral("AdressesWidget"));
-        AdressesWidget->resize(803, 442);
+        AdressesWidget->resize(803, 443);
         SiderBgi = new QLabel(AdressesWidget);
         SiderBgi->setObjectName(QStringLiteral("SiderBgi"));
         SiderBgi->setGeometry(QRect(0, 0, 310, 442));
@@ -107,7 +107,8 @@ public:
         Container = new QScrollArea(AdressesWidget);
         Container->setObjectName(QStringLiteral("Container"));
         Container->setGeometry(QRect(310, 0, 493, 442));
-        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        Container->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         Container->setWidgetResizable(false);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));

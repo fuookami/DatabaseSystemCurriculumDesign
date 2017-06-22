@@ -1,8 +1,8 @@
 #include "AddressWidget.h"
 
 #include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlTableModel>
-#include <QtSql/QSqlRecord>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 #include <QtCore/QDebug>
 
 AddressWidget::AddressWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> &_telephoneMacs,
@@ -22,20 +22,21 @@ AddressWidget::~AddressWidget()
 
 void AddressWidget::refreshAddressList()
 {
+	infoBtnContainer->clear();
+	for (unsigned int i(0), j(infoBtns.size()); i != j; ++i)
+		delete infoBtns[i];
 	infoBtns.clear();
 
 	QSqlDatabase db(QSqlDatabase::database(DBName));
-	QSqlTableModel model(nullptr, db);
-	model.setTable("Addresses");
-	model.setFilter("id > 0");
-	model.select();
+	QSqlQuery query(db);
+	query.exec("SELECT id, name, unit, identity, remark FROM DSCD.Addresses WHERE id > 0");
 
-	for (unsigned int i(0), j(model.rowCount()); i != j; ++i)
+	while (query.next())
 	{
-		QSqlRecord record(model.record(i));
-		AddressInfoBtn *newInfoBtn(new AddressInfoBtn(record.value("id").toInt(),
-			record.value("name").toString(), record.value("remark").toString(),
-			record.value("unit").toString(), record.value("identity").toString()));
+		AddressInfoBtn *newInfoBtn(new AddressInfoBtn(query.value("id").toInt(),
+			query.value("name").toString(), query.value("remark").toString(),
+			query.value("unit").toString(), query.value("identity").toString()));
+
 		infoBtns.append(newInfoBtn);
 		infoBtnContainer->addWidget(newInfoBtn);
 	}

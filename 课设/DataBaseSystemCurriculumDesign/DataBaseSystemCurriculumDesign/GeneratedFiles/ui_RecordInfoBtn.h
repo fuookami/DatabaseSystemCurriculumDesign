@@ -35,7 +35,7 @@ public:
         PhoneNumber->setGeometry(QRect(10, 10, 273, 25));
         QFont font;
         font.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
-        font.setPointSize(18);
+        font.setPointSize(14);
         PhoneNumber->setFont(font);
         TimeLocal = new QLabel(RecordInfoBtn);
         TimeLocal->setObjectName(QStringLiteral("TimeLocal"));

@@ -42,9 +42,10 @@ public:
         SiderBgi->setStyleSheet(QStringLiteral("background-color: rgb(204, 204, 204);"));
         Container = new QScrollArea(RecordsWidget);
         Container->setObjectName(QStringLiteral("Container"));
-        Container->setGeometry(QRect(312, 0, 493, 442));
-        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        Container->setWidgetResizable(true);
+        Container->setGeometry(QRect(310, 0, 493, 442));
+        Container->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        Container->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        Container->setWidgetResizable(false);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
         scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 491, 440));
@@ -62,7 +63,8 @@ public:
         InfoContainer->setStyleSheet(QLatin1String("background-color: rgba(255, 255, 255, 0);\n"
 "border: none;"));
         InfoContainer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        InfoContainer->setWidgetResizable(true);
+        InfoContainer->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        InfoContainer->setWidgetResizable(false);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 293, 382));

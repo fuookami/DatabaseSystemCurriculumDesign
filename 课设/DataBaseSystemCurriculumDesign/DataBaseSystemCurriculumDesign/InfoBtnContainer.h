@@ -13,6 +13,7 @@ public:
 	~InfoBtnContainer();
 
 	void addWidget(QWidget *w);
+	void clear(void);
 
 signals:
 	void btnClicked(int id);

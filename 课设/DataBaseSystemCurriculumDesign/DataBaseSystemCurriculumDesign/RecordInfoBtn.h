@@ -10,7 +10,7 @@ class RecordInfoBtn : public QPushButton
 	Q_OBJECT;
 
 public:
-	RecordInfoBtn(int _id, const QString &_phoneNumber, const QDateTime &_bgTime, 
+	RecordInfoBtn(int _id, const QString &_phoneNumber, const QString &_addressName, const QDateTime &_bgTime,
 		const QDateTime &_edTime, const QString &_localService, QWidget *parent = nullptr);
 	~RecordInfoBtn();
 

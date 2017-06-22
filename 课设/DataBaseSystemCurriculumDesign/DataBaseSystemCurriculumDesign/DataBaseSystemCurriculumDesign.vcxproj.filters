@@ -146,6 +146,21 @@
     <ClCompile Include="InfoBtnContainer.cpp">
       <Filter>Source Files\Widget</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RecordDetailContainer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RecordDetailContainer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RecordDataInterface.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordDetailContainer.cpp">
+      <Filter>Source Files\Widget\RecordWidgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RecordDataInterface.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -193,6 +208,12 @@
     <CustomBuild Include="InfoBtnContainer.h">
       <Filter>Header Files\Widgets</Filter>
     </CustomBuild>
+    <CustomBuild Include="RecordDetailContainer.h">
+      <Filter>Header Files\Widgets\RecordWidgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RecordDataInterface.h">
+      <Filter>Header Files\Widgets\RecordWidgets</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h">
@@ -212,9 +233,6 @@
     </ClInclude>
     <ClInclude Include="AddressDataInterface.h">
       <Filter>Header Files\Widgets\AddressWidgets</Filter>
-    </ClInclude>
-    <ClInclude Include="RecordDataInterface.h">
-      <Filter>Header Files\Widgets\RecordWidgets</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AdressInfoBtn.h">
       <Filter>Generated Files</Filter>

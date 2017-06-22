@@ -21,6 +21,17 @@ void InfoBtnContainer::addWidget(QWidget * w)
 	}
 }
 
+void InfoBtnContainer::clear(void)
+{
+	for (unsigned int i(0), j(widgets.size()); i != j; ++i)
+	{
+		widgets[i]->close();
+		disconnect(widgets[i]);
+	}
+	this->setGeometry(0, 0, widWidth, 0);
+	widHieght = 0;
+}
+
 void InfoBtnContainer::btnClickedSlot(int id)
 {
 	emit btnClicked(id);
