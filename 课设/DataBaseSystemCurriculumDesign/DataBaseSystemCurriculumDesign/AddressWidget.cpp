@@ -5,6 +5,7 @@
 #include <QtSql/QSqlError>
 #include <QtCore/QDebug>
 #include <QtWidgets/QMessageBox>
+#include <memory>
 
 AddressWidget::AddressWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> &_telephoneMacs,
 	const QString &_DBName, QWidget * parent)
@@ -71,7 +72,7 @@ void AddressWidget::uploadDataSlot(const AddressData &data)
 	}
 	else
 	{
-		QString sql(QString("UPDATE DSCD.Addresses SET name = %1, mobile = %2, mobile2 = %3, telephone = %4"
+		QString sql(QString("UPDATE DSCD.Addresses SET name = %1, mobile = %2, mobile2 = %3, telephone = %4, "
 			"unit = %5, identity = %6, remark = %7, email = %8 WHERE id = %9")
 			.arg(data.name.isEmpty() ? "NULL" : QString("'%1'").arg(data.name))
 			.arg(data.mobile.isEmpty() ? "NULL" : QString("'%1'").arg(data.mobile))
@@ -134,7 +135,25 @@ void AddressWidget::modifyBtnClicked()
 		addressDetailInput->show();
 		connect(addressDetailInput, SIGNAL(upload(const AddressData &)), this, SLOT(uploadDataSlot(const AddressData &)));
 
-		// set data
+		QSqlDatabase db(QSqlDatabase::database(DBName));
+		QSqlQuery query(db);
+		query.prepare("SELECT * FROM DSCD.Addresses WHERE id = :id");
+		query.bindValue(":id", currID);
+		query.exec();
+		query.next();
+
+		AddressData data = {
+			currID,
+			query.value("name").toString(),
+			query.value("remark").toString(),
+			query.value("unit").toString(),
+			query.value("identity").toString(),
+			query.value("email").toString(),
+			query.value("mobile").toString(),
+			query.value("mobile2").toString(),
+			query.value("telephone").toString()
+		};
+		addressDetailInput->set(std::move(data));
 
 		state = Modify;
 	}
