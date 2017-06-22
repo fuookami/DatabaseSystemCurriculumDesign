@@ -176,6 +176,15 @@
     <ClCompile Include="AddressDetailContainer.cpp">
       <Filter>Source Files\Widget\AddressWidgets</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddressDetailInput.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddressDetailInput.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressDetailInput.cpp">
+      <Filter>Source Files\Widget\AddressWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -238,6 +247,9 @@
     <CustomBuild Include="Resources\AdressDetailInput.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="AddressDetailInput.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h">
@@ -260,9 +272,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RecordInfoBtn.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AddressDetailInput.h">
-      <Filter>Header Files\Widgets\AddressWidgets</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AdressDetailInput.h">
       <Filter>Generated Files</Filter>

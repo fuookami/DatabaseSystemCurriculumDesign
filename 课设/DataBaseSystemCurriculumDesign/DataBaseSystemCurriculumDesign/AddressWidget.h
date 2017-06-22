@@ -4,6 +4,7 @@
 #include "AddressInfoBtn.h"
 #include "InfoBtnContainer.h"
 #include "AddressDetailContainer.h"
+#include "AddressDetailInput.h"
 #include "ui_AdressesWidget.h"
 #include <QtWidgets/QWidget>
 
@@ -18,6 +19,9 @@ public:
 
 private slots:
 	void infoBtnClicked(int id);
+	void uploadDataSlot(const AddressData &);
+	void addBtnClicked(void);
+	void modifyBtnClicked(void);
 	void deleteBtnClicked(void);
 
 private:
@@ -38,6 +42,7 @@ private:
 
 	unsigned int state;
 	unsigned int currID;
+	AddressDetailInput *addressDetailInput;
 	AddressDetailContainer *addressDetailContainer;
 	InfoBtnContainer *infoBtnContainer;
 	QVector<AddressInfoBtn *> infoBtns;

@@ -45,8 +45,8 @@ public:
     QLineEdit *Unit;
     QLineEdit *Email;
     QHBoxLayout *horizontalLayout;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *Upload;
+    QPushButton *Cancel;
 
     void setupUi(QWidget *AdressDetailInput)
     {
@@ -176,20 +176,23 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        pushButton = new QPushButton(gridLayoutWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        Upload = new QPushButton(gridLayoutWidget);
+        Upload->setObjectName(QStringLiteral("Upload"));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\347\255\211\347\272\277"));
         font1.setPointSize(12);
-        pushButton->setFont(font1);
+        Upload->setFont(font1);
+        Upload->setStyleSheet(QStringLiteral("border: 1px solid rgb(0, 0, 0);"));
+        Upload->setFlat(false);
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(Upload);
 
-        pushButton_2 = new QPushButton(gridLayoutWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setFont(font1);
+        Cancel = new QPushButton(gridLayoutWidget);
+        Cancel->setObjectName(QStringLiteral("Cancel"));
+        Cancel->setFont(font1);
+        Cancel->setStyleSheet(QStringLiteral("border: 1px solid rgb(0, 0, 0);"));
 
-        horizontalLayout->addWidget(pushButton_2);
+        horizontalLayout->addWidget(Cancel);
 
 
         gridLayout->addLayout(horizontalLayout, 5, 3, 1, 1);
@@ -211,8 +214,8 @@ public:
         label_8->setText(QApplication::translate("AdressDetailInput", "\346\211\213\346\234\2721", Q_NULLPTR));
         label_9->setText(QApplication::translate("AdressDetailInput", "\346\211\213\346\234\2722", Q_NULLPTR));
         label_10->setText(QApplication::translate("AdressDetailInput", "\345\272\247\346\234\272", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("AdressDetailInput", "\344\277\235\345\255\230", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("AdressDetailInput", "\345\217\226\346\266\210", Q_NULLPTR));
+        Upload->setText(QApplication::translate("AdressDetailInput", "\344\277\235\345\255\230", Q_NULLPTR));
+        Cancel->setText(QApplication::translate("AdressDetailInput", "\346\270\205\347\251\272", Q_NULLPTR));
     } // retranslateUi
 
 };
