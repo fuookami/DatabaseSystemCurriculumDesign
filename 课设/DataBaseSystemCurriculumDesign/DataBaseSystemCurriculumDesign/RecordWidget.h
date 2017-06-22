@@ -9,7 +9,7 @@ class RecordWidget : public QWidget
 	Q_OBJECT;
 
 public:
-	RecordWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> _telephoneMacs,
+	RecordWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> &_telephoneMacs,
 		const QString &_DBName, QWidget *parent = nullptr);
 	~RecordWidget();
 

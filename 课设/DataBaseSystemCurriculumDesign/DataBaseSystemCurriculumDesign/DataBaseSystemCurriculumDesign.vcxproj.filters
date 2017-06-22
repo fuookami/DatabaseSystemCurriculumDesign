@@ -137,6 +137,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_AddressInfoBtn.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_InfoBtnContainer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_InfoBtnContainer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoBtnContainer.cpp">
+      <Filter>Source Files\Widget</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -180,6 +189,9 @@
     </CustomBuild>
     <CustomBuild Include="Resources\RecordInfoBtn.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="InfoBtnContainer.h">
+      <Filter>Header Files\Widgets</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

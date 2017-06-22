@@ -98,7 +98,8 @@ public:
         InfoContainer->setStyleSheet(QLatin1String("background-color: rgba(255, 255, 255, 0);\n"
 "border: none;"));
         InfoContainer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        InfoContainer->setWidgetResizable(true);
+        InfoContainer->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        InfoContainer->setWidgetResizable(false);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 293, 342));
@@ -107,7 +108,7 @@ public:
         Container->setObjectName(QStringLiteral("Container"));
         Container->setGeometry(QRect(310, 0, 493, 442));
         Container->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        Container->setWidgetResizable(true);
+        Container->setWidgetResizable(false);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
         scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 491, 440));

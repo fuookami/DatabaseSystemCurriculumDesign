@@ -6,7 +6,7 @@ const QString MainWidget::MainWidgetBgiFilePath("Resources\\MainWidgetBgi.jpg");
 const unsigned int MainWidget::winWidth = 848;
 const unsigned int MainWidget::winHeight = 480;
 
-MainWidget::MainWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> _telephoneMacs,
+MainWidget::MainWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> &_telephoneMacs,
 	const QString &_DBName, QWidget *parent /* = nullptr */)
 	: QMainWindow(parent), ui(new Ui::MainWidget()),
 	mobileMacs(_mobileMacs), telephoneMacs(_telephoneMacs), DBName(_DBName),
@@ -46,7 +46,7 @@ void MainWidget::addressSlot(void)
 	setBtnSiderActivePalette(ui->AddressSider);
 	setBtnSiderUnactivePalette(ui->RecordSider);
 
-	addressWidget = new AddressWidget();
+	addressWidget = new AddressWidget(mobileMacs, telephoneMacs, DBName);
 	ui->Container->setWidget(addressWidget);
 	addressWidget->show();
 }
@@ -56,7 +56,7 @@ void MainWidget::recordSlot(void)
 	setBtnSiderUnactivePalette(ui->AddressSider);
 	setBtnSiderActivePalette(ui->RecordSider);
 
-	recordWidget = new RecordWidget();
+	recordWidget = new RecordWidget(mobileMacs, telephoneMacs, DBName);
 	ui->Container->setWidget(recordWidget);
 	recordWidget->show();
 }

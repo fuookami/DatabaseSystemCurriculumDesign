@@ -146,8 +146,11 @@ border: none;</string>
    <property name="verticalScrollBarPolicy">
     <enum>Qt::ScrollBarAsNeeded</enum>
    </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <property name="widgetResizable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <widget class="QWidget" name="scrollAreaWidgetContents">
     <property name="geometry">
@@ -173,7 +176,7 @@ border: none;</string>
     <enum>Qt::ScrollBarAsNeeded</enum>
    </property>
    <property name="widgetResizable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <widget class="QWidget" name="scrollAreaWidgetContents_2">
     <property name="geometry">

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Basic.h"
-#include "ui_RecordInfoWidget.h"
+#include "ui_RecordInfoBtn.h"
 #include <QtWidgets/QPushButton>
 #include <QtCore/QDateTime>
 
@@ -10,9 +10,8 @@ class RecordInfoBtn : public QPushButton
 	Q_OBJECT;
 
 public:
-	RecordInfoBtn(int id, const QString &phoneNumber, const QDateTime &bgTime, const QDateTime &edTime,
-		const QVector<AddressApp::MobileMac> &mobileMacs, const QVector<AddressApp::TelephoneMac> &telephoneMacs,
-		QWidget *parent = nullptr);
+	RecordInfoBtn(int _id, const QString &_phoneNumber, const QDateTime &_bgTime, 
+		const QDateTime &_edTime, const QString &_localService, QWidget *parent = nullptr);
 	~RecordInfoBtn();
 
 signals:
@@ -22,11 +21,8 @@ private slots:
 	void clickedSlot(void);
 
 private:
-	const QVector<AddressApp::MobileMac> &mobileMacs;
-	const QVector<AddressApp::TelephoneMac> &telephoneMacs;
-
 	int id;
 	QString phoneNumber;
 	QString timeLocal;
-	Ui::RecordInfoWidget *ui;
+	Ui::RecordInfoBtn *ui;
 };

@@ -15,7 +15,7 @@ class MainWidget : public QMainWindow
 	Q_OBJECT;
 
 public:
-	MainWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> _telephoneMacs,
+	MainWidget(const QVector<AddressApp::MobileMac> &_mobileMacs, const QVector<AddressApp::TelephoneMac> &_telephoneMacs,
 	const QString &_DBName, QWidget *parent = nullptr);
 	~MainWidget();
 
