@@ -161,6 +161,21 @@
     <ClCompile Include="GeneratedFiles\Release\moc_RecordDataInterface.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddressDataInterface.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddressDataInterface.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddressDetailContainer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddressDetailContainer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressDetailContainer.cpp">
+      <Filter>Source Files\Widget\AddressWidgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Resources\AdressesWidget.ui">
@@ -214,6 +229,15 @@
     <CustomBuild Include="RecordDataInterface.h">
       <Filter>Header Files\Widgets\RecordWidgets</Filter>
     </CustomBuild>
+    <CustomBuild Include="AddressDataInterface.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddressDetailContainer.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\AdressDetailInput.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_AdressesWidget.h">
@@ -231,13 +255,16 @@
     <ClInclude Include="GeneratedFiles\ui_LoaderWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="AddressDataInterface.h">
-      <Filter>Header Files\Widgets\AddressWidgets</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AdressInfoBtn.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RecordInfoBtn.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressDetailInput.h">
+      <Filter>Header Files\Widgets\AddressWidgets</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AdressDetailInput.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

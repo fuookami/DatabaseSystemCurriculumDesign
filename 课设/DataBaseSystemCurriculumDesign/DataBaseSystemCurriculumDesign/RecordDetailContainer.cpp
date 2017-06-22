@@ -70,9 +70,9 @@ QString RecordDetailContainer::generateNewRichText(const QString & phoneNumber, 
 	return std::move(newRichText);
 }
 
-QString RecordDetailContainer::getDistanceTime(const QDateTime & bg_time, const QDateTime & ed_time)
+QString RecordDetailContainer::getDistanceTime(const QDateTime & bgTime, const QDateTime & edTime)
 {
-	int distanceSec = bg_time.secsTo(ed_time);
+	int distanceSec = bgTime.secsTo(edTime);
 	QString distance;
 	if (distanceSec >= 3600)
 		distance = QString::fromLocal8Bit("%1时%2分%3秒").arg(distanceSec / 3600)
@@ -82,6 +82,6 @@ QString RecordDetailContainer::getDistanceTime(const QDateTime & bg_time, const 
 	else
 		distance = QString::fromLocal8Bit("%1秒").arg(distanceSec);
 
-	return bg_time.toLocalTime().toString("yyyy-M-d h:m:s") + QString(" - ") + 
-		ed_time.toLocalTime().toString("h:m:s") + QString::fromLocal8Bit("， 时长：") + distance;
+	return bgTime.toLocalTime().toString("yyyy-M-d h:m:s") + QString(" - ") + 
+		edTime.toLocalTime().toString("h:m:s") + QString::fromLocal8Bit("， 时长：") + distance;
 }

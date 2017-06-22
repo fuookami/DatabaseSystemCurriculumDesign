@@ -33,6 +33,8 @@ public:
     QWidget *scrollAreaWidgetContents;
     QScrollArea *Container;
     QWidget *scrollAreaWidgetContents_2;
+    QPushButton *DelBtn;
+    QPushButton *ModifyBtn;
 
     void setupUi(QWidget *AdressesWidget)
     {
@@ -53,7 +55,7 @@ public:
         Title->setFont(font);
         AddBtn = new QPushButton(AdressesWidget);
         AddBtn->setObjectName(QStringLiteral("AddBtn"));
-        AddBtn->setGeometry(QRect(260, 10, 40, 40));
+        AddBtn->setGeometry(QRect(180, 10, 40, 40));
         QFont font1;
         font1.setFamily(QStringLiteral("Segoe UI"));
         font1.setPointSize(32);
@@ -114,6 +116,38 @@ public:
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
         scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 491, 440));
         Container->setWidget(scrollAreaWidgetContents_2);
+        DelBtn = new QPushButton(AdressesWidget);
+        DelBtn->setObjectName(QStringLiteral("DelBtn"));
+        DelBtn->setGeometry(QRect(260, 10, 40, 40));
+        DelBtn->setFont(font1);
+        DelBtn->setCursor(QCursor(Qt::PointingHandCursor));
+        DelBtn->setStyleSheet(QLatin1String("QPushButton {\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
+"	border:none;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgba(0, 0, 0, 0.2);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"	background-color: rgba(0, 0, 0, 0.3);\n"
+"}"));
+        DelBtn->setFlat(false);
+        ModifyBtn = new QPushButton(AdressesWidget);
+        ModifyBtn->setObjectName(QStringLiteral("ModifyBtn"));
+        ModifyBtn->setGeometry(QRect(220, 10, 40, 40));
+        ModifyBtn->setFont(font1);
+        ModifyBtn->setCursor(QCursor(Qt::PointingHandCursor));
+        ModifyBtn->setStyleSheet(QLatin1String("QPushButton {\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
+"	border:none;\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgba(0, 0, 0, 0.2);\n"
+"}\n"
+"QPushButton:pressed {\n"
+"	background-color: rgba(0, 0, 0, 0.3);\n"
+"}"));
+        ModifyBtn->setFlat(false);
 
         retranslateUi(AdressesWidget);
 
@@ -127,6 +161,8 @@ public:
         Title->setText(QApplication::translate("AdressesWidget", "\350\201\224\347\263\273\344\272\272", Q_NULLPTR));
         AddBtn->setText(QApplication::translate("AdressesWidget", "+", Q_NULLPTR));
         SearchLineEdit->setPlaceholderText(QApplication::translate("AdressesWidget", "\346\220\234\347\264\242", Q_NULLPTR));
+        DelBtn->setText(QApplication::translate("AdressesWidget", "\303\227", Q_NULLPTR));
+        ModifyBtn->setText(QApplication::translate("AdressesWidget", "\342\211\241", Q_NULLPTR));
     } // retranslateUi
 
 };

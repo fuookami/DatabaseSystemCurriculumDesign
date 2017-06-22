@@ -16,6 +16,7 @@ void InfoBtnContainer::addWidget(QWidget * w)
 		w->setParent(this);
 		this->setGeometry(0, 0, widWidth, widHieght + w->height() + 5);
 		w->setGeometry(0, widHieght, w->width(), w->height());
+		w->show();
 		widHieght += w->height() + 5;
 		connect(w, SIGNAL(clicked(int)), this, SLOT(btnClickedSlot(int)));
 	}
@@ -23,11 +24,7 @@ void InfoBtnContainer::addWidget(QWidget * w)
 
 void InfoBtnContainer::clear(void)
 {
-	for (unsigned int i(0), j(widgets.size()); i != j; ++i)
-	{
-		widgets[i]->close();
-		disconnect(widgets[i]);
-	}
+	widgets.clear();
 	this->setGeometry(0, 0, widWidth, 0);
 	widHieght = 0;
 }

@@ -4,5 +4,5 @@
 
 class AddressDataInterface : public QThread
 {
-
+	Q_OBJECT;
 };

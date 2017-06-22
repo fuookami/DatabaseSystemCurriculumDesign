@@ -78,6 +78,9 @@ BEFORE INSERT ON DSCD.Addresses
     IF (:NEW.group_id IS NOT NULL AND group_num = 0) THEN
       :NEW.group_id := NULL;
     END IF;
+
+	UPDATE DSCD.Records SET address_id = :NEW.id WHERE phone_number = :NEW.MOBILE OR
+      phone_number = :NEW.MOBILE2 OR phone_number = :NEW.TELEPHONE;
   END;
 --
 CREATE OR REPLACE TRIGGER DSCD.UPDATE_DSCD_Address
@@ -90,6 +93,16 @@ BEFORE UPDATE ON DSCD.Addresses
     IF (:NEW.group_id IS NOT NULL AND group_num = 0) THEN
       :NEW.group_id := NULL;
     END IF;
+
+	UPDATE DSCD.Records SET address_id = :NEW.id WHERE phone_number = :NEW.MOBILE OR
+      phone_number = :NEW.MOBILE2 OR phone_number = :NEW.TELEPHONE;
+  END;
+--
+CREATE OR REPLACE TRIGGER DSCD.DELETE_DSCD_Address
+BEFORE DELETE ON DSCD.Addresses
+  FOR EACH ROW
+  BEGIN
+    UPDATE DSCD.Records SET address_id = NULL WHERE address_id = :OLD.id;
   END;
 --
 CREATE OR REPLACE TRIGGER DSCD.INSERT_DSCD_Record

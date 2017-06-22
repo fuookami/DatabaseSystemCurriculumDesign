@@ -15,7 +15,7 @@ CREATE TABLE DSCD.Addresses (
   identity  NVARCHAR2(40) DEFAULT NULL,
   remark    NVARCHAR2(40) DEFAULT NULL,
   email     NCLOB         DEFAULT NULL,
-  group_id  INTEGER       DEFAULT (0) NOT NULL
+  group_id  INTEGER       DEFAULT NULL
 );
 
 DROP TABLE DSCD.Records;
@@ -24,7 +24,7 @@ CREATE TABLE DSCD.Records (
   phone_number VARCHAR2(20) NOT NULL,
   bg_time      TIMESTAMP    NOT NULL,
   ed_time      TIMESTAMP    NOT NULL,
-  address_id   INTEGER      DEFAULT NULL,
+  address_id   INTEGER,
   CHECK (ed_time > bg_time)
 );
 
@@ -71,6 +71,9 @@ BEFORE INSERT ON DSCD.Addresses
     IF (:NEW.group_id IS NOT NULL AND group_num = 0) THEN
       :NEW.group_id := NULL;
     END IF;
+
+    UPDATE DSCD.Records SET address_id = :NEW.id WHERE phone_number = :NEW.MOBILE OR
+      phone_number = :NEW.MOBILE2 OR phone_number = :NEW.TELEPHONE;
   END;
 
 CREATE OR REPLACE TRIGGER DSCD.UPDATE_DSCD_Address
@@ -83,6 +86,16 @@ BEFORE UPDATE ON DSCD.Addresses
     IF (:NEW.group_id IS NOT NULL AND group_num = 0) THEN
       :NEW.group_id := NULL;
     END IF;
+
+    UPDATE DSCD.Records SET address_id = :NEW.id WHERE phone_number = :NEW.MOBILE OR
+      phone_number = :NEW.MOBILE2 OR phone_number = :NEW.TELEPHONE;
+  END;
+
+CREATE OR REPLACE TRIGGER DSCD.DELETE_DSCD_Address
+BEFORE DELETE ON DSCD.Addresses
+  FOR EACH ROW
+  BEGIN
+    UPDATE DSCD.Records SET address_id = NULL WHERE address_id = :OLD.id;
   END;
 
 CREATE OR REPLACE TRIGGER DSCD.INSERT_DSCD_Record
